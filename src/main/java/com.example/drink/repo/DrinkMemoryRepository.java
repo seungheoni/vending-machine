@@ -2,6 +2,7 @@ package com.example.drink.repo;
 
 import com.example.drink.dto.Drink;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Repository;
 
 import javax.annotation.PostConstruct;
@@ -11,6 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 @Repository
+@Primary
 public class DrinkMemoryRepository implements DrinkRepository {
 
     private Map<String, List<Drink>> drinkMap;
