@@ -6,13 +6,8 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Repository;
 
 import javax.annotation.PostConstruct;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
-@Repository
-@Primary
 public class DrinkMemoryRepository implements DrinkRepository {
 
     private Map<String, List<Drink>> drinkMap;
@@ -44,10 +39,9 @@ public class DrinkMemoryRepository implements DrinkRepository {
     }
 
     @Override
-    public Drink getDrink(String drinkName) {
-
+    public Optional<Drink> getDrink(String drinkName) {
         List<Drink> drinkList = drinkMap.get(drinkName);
-        Drink drink = drinkList.get(0);
+        Optional<Drink> drink = Optional.ofNullable(drinkList.get(0));
         drinkList.remove(0);
 
         return drink;

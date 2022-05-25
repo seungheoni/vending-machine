@@ -1,9 +1,9 @@
 package com.example.drink.repo;
 
 import com.example.drink.dto.Drink;
-import org.springframework.stereotype.Repository;
 
-@Repository
+import java.util.Optional;
+
 public class DrinkJdbcRepository implements DrinkRepository{
 
     @Override
@@ -12,7 +12,7 @@ public class DrinkJdbcRepository implements DrinkRepository{
     }
 
     @Override
-    public Drink getDrink(String drinkName) {
-        return null;
+    public Optional<Drink> getDrink(String drinkName) {
+        return Optional.empty();
     }
 }
