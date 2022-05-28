@@ -15,21 +15,26 @@ public class DrinkServiceImpl implements DrinkService {
     private final DrinkRepository drinkRepository;
 
     @Override
-    public Optional sellDrink(Order order) {
+    public Drink sellDrink(Order order) throws Exception {
 
         Optional<Drink> drinkOpt = drinkRepository.getDrink(order.getDrinkName());
 
-        if(drinkOpt.isPresent()) {
-            Drink drink = drinkOpt.get();
+         /*
+            음료 판매
+            1. 음료가 존재하지 않으면 에러메시지
+            2. 고객의 금액이 부족한 경우 에러 메시지
+            3. 구매
+         */
+        Drink drink = getDrink(order.getDrinkName());
 
-            if(order.getDrinkPrice() >= drink.getPrice()) {
-                return Optional.of(drink);
-            } else {
-                return Optional.of("잔액이 부족합니다.");
-            }
+        // 보유 금액
+        int amount = order.getDrinkPrice();
+        if(!drink.enablePurchase(amount)) throw new Exception("잔액이 부족합니다.");
+        return drink;
+    }
 
-        } else {
-            return Optional.of("상품이 품절입니다.");
-        }
+    private Drink getDrink(String drinkName) throws Exception {
+        return drinkRepository.getDrink(drinkName)
+                .orElseThrow(() -> new Exception("존재하지 않는 음료수 입니다."));
     }
 }
