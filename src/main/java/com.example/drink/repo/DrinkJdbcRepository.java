@@ -1,18 +1,13 @@
 package com.example.drink.repo;
 
-import com.example.drink.dto.Drink;
-import org.springframework.stereotype.Repository;
+import com.example.drink.dto.DrinkDto;
 
-@Repository
+import java.util.Optional;
+
 public class DrinkJdbcRepository implements DrinkRepository{
 
     @Override
-    public void pushDrink(Drink drink) {
-
-    }
-
-    @Override
-    public Drink getDrink(String drinkName) {
+    public Optional<DrinkDto> findByDrinkName(String drinkName) {
         return null;
     }
 }

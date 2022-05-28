@@ -1,10 +1,11 @@
 package com.example.drink.repo;
 
-import com.example.drink.dto.Drink;
+import com.example.drink.dto.DrinkDto;
+
+import java.util.Optional;
 
 public interface DrinkRepository {
 
-    void pushDrink(Drink drink);
+    Optional<DrinkDto> findByDrinkName(String drinkName);
 
-    Drink getDrink(String drinkName);
 }
