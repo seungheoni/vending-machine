@@ -1,10 +1,10 @@
 package com.example.drink.service;
 
-import com.example.drink.dto.Drink;
-import com.example.drink.dto.Order;
+import com.example.drink.dto.DrinkDto;
+import com.example.drink.dto.OrderDto;
 
 public interface DrinkService {
 
-    Drink sellDrink(Order order) throws Exception;
+    DrinkDto sellDrink(OrderDto order) throws Exception;
 
 }
