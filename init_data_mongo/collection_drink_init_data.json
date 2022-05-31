@@ -1,4 +1,4 @@
-use vending_machine;
+use vending-machine;
 
 [{ "_id" : 0 , "name": "콜라" , "price": 2000 , "quantity" : 5},
 { "_id": 1 , "name" : "식혜" , "price": 3000 , "quantity" : 5},

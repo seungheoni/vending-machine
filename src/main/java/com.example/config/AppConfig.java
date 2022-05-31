@@ -23,6 +23,6 @@ public class AppConfig {
 
     @Bean
     public MongoTemplate mongoTemplate() {
-        return new MongoTemplate(mongoClient(), "vending_machine");
+        return new MongoTemplate(mongoClient(), "vending-machine");
     }
 }
