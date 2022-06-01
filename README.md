@@ -25,7 +25,14 @@
 - 관리자는 음료수의 종류와 새로운 가격을 입력한다.
 - 마지막으로 관리자느 시스템 모드 스위치를 `운영`으로 설정하고 자판기를 잠근다.
 
-
-
 ### draw.io
 [https://app.diagrams.net/#G1RZ5ha8XBF10R33p4uVCIcujDG-qeBpUi](https://drive.google.com/file/d/1RZ5ha8XBF10R33p4uVCIcujDG-qeBpUi/view?usp=sharing)
+
+<details>
+<summary>어플리케이션 시작방법</summary>
+
+> - 터미널 docker-compose.yml 파일 위치로 이동
+> - docker-compose up
+> - mongodb compass 실행
+> - collection_drink_init_data.json
+</details>
