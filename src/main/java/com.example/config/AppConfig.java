@@ -1,6 +1,5 @@
 package com.example.config;
 
-import com.example.drink.repo.DrinkRepository;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import org.springframework.beans.factory.annotation.Value;
