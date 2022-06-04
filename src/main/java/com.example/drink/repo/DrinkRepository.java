@@ -1,11 +1,15 @@
 package com.example.drink.repo;
 
-import com.example.drink.dto.DrinkDto;
+import com.example.drink.model.Drink;
+import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
-public interface DrinkRepository {
+@Repository
+public interface DrinkRepository extends MongoRepository<Drink,String> {
 
-    Optional<DrinkDto> findByDrinkName(String drinkName);
+    Optional<Drink> findByName(String name);
+
 
 }
