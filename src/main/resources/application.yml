@@ -1,4 +1,7 @@
 drink:
   product:
       list: 콜라,사이다,식혜
-
+spring:
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017
