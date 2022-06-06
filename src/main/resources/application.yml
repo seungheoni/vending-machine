@@ -5,3 +5,15 @@ spring:
   data:
     mongodb:
       uri: mongodb://localhost:27017
+      database: vending-machine
+  mvc:
+    static-path-pattern: "/static/**"
+  thymeleaf:
+    cache: false
+    check-template-location: true
+    prefix: classpath:templates/
+    suffix: .html
+
+  devtools:
+    livereload:
+      enabled: true
