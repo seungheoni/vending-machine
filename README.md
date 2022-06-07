@@ -33,6 +33,6 @@
 
 > - 터미널 docker-compose.yml 파일 위치로 이동
 > - docker-compose up
-> - mongodb compass 실행
-> - collection_drink_init_data.json
+> - vending-machine 데이터베이스 생성
+> - drink 컬렉션 생성 후 modeling/init_data_mongo/vending-machine/*.json 컬렉션 이름 별 초기화 데이터
 </details>
