@@ -31,8 +31,8 @@
 <details>
 <summary>어플리케이션 시작방법</summary>
 
-> - 터미널 docker-compose.yml 파일 위치로 이동
-> - docker-compose up
-> - vending-machine 데이터베이스 생성
-> - drink 컬렉션 생성 후 modeling/init_data_mongo/vending-machine/*.json 컬렉션 이름 별 초기화 데이터
+> - gradle 탭의 build 실행 
+> - /Users/seungheon/IdeaProjects/modeling/mongodb/build.sh 실행 (실행전에 docker 엔진은 켜져있어야함)
+> - /Users/seungheon/IdeaProjects/modeling/docker-compose.yml 실행
+> - compass 같은 툴로 접속 확인
 </details>
