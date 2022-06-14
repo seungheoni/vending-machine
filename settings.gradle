@@ -1,7 +1,5 @@
 rootProject.name = 'drink'
 include 'core'
-include 'api'
+include 'display'
 include 'web'
 include 'mongodb'
-
-

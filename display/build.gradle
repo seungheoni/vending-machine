@@ -1,6 +1,6 @@
 bootJar {
     enabled = true
-    archiveName 'DRINK.API.jar'
+    archiveName 'DRINK.DISPLAY.jar'
 }
 
 version = 'v01'

@@ -1,6 +1,6 @@
-package com.example.drink.rest;
+package com.example.drink.display.controller;
 
-import com.example.drink.dto.DisplayDrinkDto;
+import com.example.drink.display.dto.DrinkDisplayDto;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,7 +15,7 @@ public class DisplayController {
      * @author ued123
      */
     @GetMapping(path = "/display", produces = MediaType.APPLICATION_JSON_VALUE)
-    public DisplayDrinkDto displayDrink(DisplayDrinkDto displayDrinkDto) {
+    public DrinkDisplayDto displayDrink(DrinkDisplayDto displayDrinkDto) {
 
 
         return displayDrinkDto;

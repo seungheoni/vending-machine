@@ -1,4 +1,4 @@
-package com.example.drink.dto;
+package com.example.drink.display.dto;
 
 import lombok.Data;
 import lombok.ToString;

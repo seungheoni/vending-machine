@@ -1,4 +1,4 @@
-package com.example.drink.dto;
+package com.example.drink.display.dto;
 
 import com.example.drink.core.Status;
 import lombok.Data;
@@ -6,7 +6,7 @@ import lombok.ToString;
 
 @Data
 @ToString
-public class DisplayDrinkDto {
+public class DrinkDisplayDto {
 
     private int position;
     private Status status;
