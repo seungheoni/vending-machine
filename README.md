@@ -27,7 +27,9 @@
 
 ## 설계
 ### 프로토타입
-https://github.com/ued123/modeling/issues/10
+<img width="566" alt="image" src="https://user-images.githubusercontent.com/32861341/174527535-7d95516d-48a3-48dd-95e1-2c7d456baeea.png">
+참고 : https://github.com/ued123/modeling/issues/10
+
 
 ### 테이블
 [https://app.diagrams.net/#G1RZ5ha8XBF10R33p4uVCIcujDG-qeBpUi](https://drive.google.com/file/d/1RZ5ha8XBF10R33p4uVCIcujDG-qeBpUi/view?usp=sharing)
