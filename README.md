@@ -25,8 +25,16 @@
 - 관리자는 음료수의 종류와 새로운 가격을 입력한다.
 - 마지막으로 관리자느 시스템 모드 스위치를 `운영`으로 설정하고 자판기를 잠근다.
 
-### draw.io
+## 설계
+### 프로토타입
+https://github.com/ued123/modeling/issues/10
+
+### 테이블
 [https://app.diagrams.net/#G1RZ5ha8XBF10R33p4uVCIcujDG-qeBpUi](https://drive.google.com/file/d/1RZ5ha8XBF10R33p4uVCIcujDG-qeBpUi/view?usp=sharing)
+
+### rest api
+https://github.com/ued123/modeling/wiki/rest-api
+
 
 <details>
 <summary>어플리케이션 시작방법</summary>
