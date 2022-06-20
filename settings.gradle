@@ -1,5 +1,3 @@
-rootProject.name = 'drink'
-include 'api'
-include 'web'
-include 'mongodb'
-
+rootProject.name = 'vending-machine'
+include 'drink-api'
+include 'application'
