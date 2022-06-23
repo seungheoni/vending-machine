@@ -9,10 +9,10 @@ spring:
   mvc:
     static-path-pattern: /static/**
   thymeleaf:
-    cache: false
     check-template-location: true
     prefix: classpath:static/templates/
     suffix: .html
+    cache: false
 
   devtools:
     livereload:

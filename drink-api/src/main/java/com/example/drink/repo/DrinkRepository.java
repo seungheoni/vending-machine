@@ -11,5 +11,4 @@ public interface DrinkRepository extends MongoRepository<Drink,String> {
 
     Optional<Drink> findByName(String name);
 
-
 }

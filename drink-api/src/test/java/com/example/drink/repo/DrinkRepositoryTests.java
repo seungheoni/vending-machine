@@ -17,6 +17,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -98,8 +99,16 @@ public class DrinkRepositoryTests {
 
         List<Drink> drinks = Arrays.asList(new Drink(null,"콜라",2000,30),
                 new Drink(null,"식헤",3000,30),
-                new Drink(null,"사이다",1500,30));
+                new Drink(null,"사이다",1500,0));
 
         return drinks;
+    }
+
+
+    @Test
+    public void drinkServiceRepo() {
+
+        List<Drink> drinkList = drinkRepository.findAll().stream().filter(d -> d.getQuantity() > 0 ).collect(Collectors.toList());
+        System.out.println(drinkList);
     }
 }
