@@ -18,17 +18,11 @@ import java.util.stream.Collectors;
 public class DrinkServiceImpl implements DrinkService {
 
     private final DrinkRepository drinkRepository;
-    /*
-    public List<DrinkDto> GetDrinkAllList() {
-         List<DrinkDto> drinkList = drinkRepository.findAll().stream()
-                                                   .map(d -> new DrinkDto(1 , d.getId().toString(), Status.AVAILABLE,d.getName(),d.getPrice()))
-                                                   .collect(Collectors.toList());
-
-         return drinkList;
-    }
-     */
 
     public List<DrinkDisplayDTO> GetDrinkAllList() {
-        return drinkRepository.findAll().stream().map(Drink::toDrinkDisplayDTOs).flatMap(Collection::stream).collect(Collectors.toList());
+        return drinkRepository.findAll().stream()
+                .map(Drink::toDrinkDisplayDTOs)
+                .flatMap(Collection::stream)
+                .collect(Collectors.toList());
     }
 }

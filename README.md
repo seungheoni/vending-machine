@@ -41,8 +41,8 @@ https://github.com/ued123/modeling/wiki/rest-api
 <details>
 <summary>어플리케이션 시작방법</summary>
 
-> - 터미널 docker-compose.yml 파일 위치로 이동
-> - docker-compose up
-> - vending-machine 데이터베이스 생성
-> - drink 컬렉션 생성 후 modeling/init_data_mongo/vending-machine/*.json 컬렉션 이름 별 초기화 데이터
+> - docker/build.sh을 통한 drink_mongodb 컨테이너 이미지 생성
+> - docker/docker-compose.yml 파일 위치로 이동
+> - docker-compose 실행
+> - mongodb 초기화 데이터 생성시 IDEL에서 DrinkApplication 실행 옵션으로 active.profile = dev 로 바꾸어준다.
 </details>
