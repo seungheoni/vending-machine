@@ -4,8 +4,9 @@ drink:
 spring:
   data:
     mongodb:
-      uri: mongodb://localhost:27017
+      uri: mongodb://seongheon:qwer1234@localhost:27017
       database: vending-machine
+
   mvc:
     static-path-pattern: /static/**
   thymeleaf:

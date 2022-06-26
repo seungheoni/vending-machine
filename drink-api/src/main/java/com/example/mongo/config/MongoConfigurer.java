@@ -18,6 +18,7 @@ public class MongoConfigurer {
     @Value("${spring.data.mongodb.uri}")
     private String mongoUrl;
 
+
     @Bean
     public MongoClient mongoClient() {
         return MongoClients.create(mongoUrl);
