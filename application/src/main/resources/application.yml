@@ -1,0 +1,20 @@
+drink:
+  product:
+    list: 콜라,사이다,식혜
+spring:
+  data:
+    mongodb:
+      uri: mongodb://seongheon:qwer1234@localhost:27017
+      database: vending-machine
+
+  mvc:
+    static-path-pattern: /static/**
+  thymeleaf:
+    check-template-location: true
+    prefix: classpath:static/templates/
+    suffix: .html
+    cache: false
+
+  devtools:
+    livereload:
+      enabled: true

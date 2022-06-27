@@ -1,0 +1,14 @@
+plugins {
+    id 'war'
+}
+
+bootWar {
+    enabled = true
+    archiveName 'DRINK.WEB.war'
+}
+
+dependencies {
+    implementation project(':drink-api');
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+}
