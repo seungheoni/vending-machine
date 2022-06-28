@@ -28,7 +28,7 @@ public class Drink {
     public List<DrinkDisplayDTO> toDrinkDisplayDTOs() {
         return displays.stream().map(display -> {
             Status status = (quantity > 0)? Status.AVAILABLE : Status.SOLDOUT;
-            return new DrinkDisplayDTO(display.position, id.toHexString(), status, name, price);
+            return new DrinkDisplayDTO(display.position, id, status, name, price);
         }).collect(Collectors.toList());
     }
 }
