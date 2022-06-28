@@ -1,10 +1,13 @@
 package com.example.mongo.config;
 
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import com.mongodb.ConnectionString;
 import com.mongodb.MongoClientSettings;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.jackson.Jackson2ObjectMapperBuilderCustomizer;
 import org.springframework.boot.autoconfigure.mongo.MongoProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -46,5 +49,10 @@ public class MongoConfigurer extends AbstractMongoClientConfiguration  {
     @Override
     protected String getDatabaseName() {
         return "vending-machine";
+    }
+
+    @Bean
+    public Jackson2ObjectMapperBuilderCustomizer jsonCustomizer() {
+        return builder -> builder.serializerByType(ObjectId.class, ToStringSerializer.instance);
     }
 }
