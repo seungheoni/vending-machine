@@ -1,7 +1,6 @@
 package com.example.mongo.model;
 
 import com.example.drink.dto.DrinkDisplayDTO;
-import com.example.drink.dto.DrinkDto;
 import com.example.drink.enums.Status;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -27,8 +26,18 @@ public class Drink {
 
     public List<DrinkDisplayDTO> toDrinkDisplayDTOs() {
         return displays.stream().map(display -> {
-            Status status = (quantity > 0)? Status.AVAILABLE : Status.SOLDOUT;
+            Status status = (quantity > 0) ? Status.AVAILABLE : Status.SOLDOUT;
             return new DrinkDisplayDTO(display.position, id, status, name, price);
         }).collect(Collectors.toList());
+    }
+
+    /**
+     * 음료 데이터 생성
+     * @param name 이름
+     * @param price 가격
+     * @param quantity 수량
+     */
+    public static Drink of(String name, int price, int quantity) {
+        return new Drink(null, name, price, quantity, null);
     }
 }
