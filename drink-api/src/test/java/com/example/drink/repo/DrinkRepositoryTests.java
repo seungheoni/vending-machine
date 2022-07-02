@@ -1,11 +1,17 @@
 package com.example.drink.repo;
 
 import com.example.mongo.config.MongoConfigurer;
+import com.example.mongo.model.Display;
+import com.example.mongo.model.DisplayDrinkResult;
 import com.example.mongo.model.Drink;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.aggregation.Aggregation;
+import org.springframework.data.mongodb.core.aggregation.LookupOperation;
+import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.DynamicPropertyRegistry;
@@ -27,6 +33,10 @@ import static org.junit.jupiter.api.Assertions.*;
 public class DrinkRepositoryTests {
 
     static MongoDBContainer mongoDBContainer = new MongoDBContainer(DockerImageName.parse("mongo:4.0.10"));
+
+    @Autowired
+    MongoTemplate mongoTemplate;
+
 
     static {
         mongoDBContainer.start();
@@ -110,5 +120,18 @@ public class DrinkRepositoryTests {
 
         List<Drink> drinkList = drinkRepository.findAll().stream().filter(d -> d.getQuantity() > 0 ).collect(Collectors.toList());
         System.out.println(drinkList);
+    }
+
+    @Test
+    public void displayDrinkLookupOperation() {
+
+        LookupOperation lookupOperation = LookupOperation.newLookup()
+                .from("display")
+                .localField("_id")
+                .foreignField("_id")
+                .as("displays");
+
+        Aggregation aggregation = Aggregation.newAggregation(Aggregation.match(Criteria.where("drinkId").is("1")) , lookupOperation);
+        mongoTemplate.aggregate(aggregation, "drink", DisplayDrinkResult.class).getMappedResults();
     }
 }

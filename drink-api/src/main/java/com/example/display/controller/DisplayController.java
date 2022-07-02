@@ -1,7 +1,7 @@
 package com.example.display.controller;
 
-import com.example.drink.dto.DrinkDisplayDTO;
-import com.example.drink.service.DrinkService;
+import com.example.display.service.DisplayService;
+import com.example.mongo.model.DisplayDrinkResult;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,14 +18,14 @@ public class DisplayController {
     /**
      * DrinkService -> DisplayService
      */
-    private final DrinkService drinkService;
+    private final DisplayService DisplayService;
     /**
      * 상품 진열
      * @author ued123
      */
     @GetMapping(path = "/display", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<DrinkDisplayDTO> drinkDisplay() {
-        return drinkService.GetDrinkAllList();
+    public List<DisplayDrinkResult> drinkDisplay() {
+        return DisplayService.GetDrinkAllList();
     }
 
 }
