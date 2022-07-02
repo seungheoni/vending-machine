@@ -41,6 +41,4 @@ public class DbIntegrationTests {
         Document commandResult = mongoDatabase.runCommand(command);
         System.out.println(commandResult);
     }
-
-
 }

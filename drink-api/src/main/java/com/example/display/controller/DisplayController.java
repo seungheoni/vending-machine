@@ -1,7 +1,7 @@
 package com.example.display.controller;
 
 import com.example.display.service.DisplayService;
-import com.example.mongo.model.DisplayDrinkResult;
+import com.example.display.dto.DisplayDrinkView;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,7 +24,7 @@ public class DisplayController {
      * @author ued123
      */
     @GetMapping(path = "/display", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<DisplayDrinkResult> drinkDisplay() {
+    public List<DisplayDrinkView> drinkDisplay() {
         return DisplayService.GetDrinkAllList();
     }
 

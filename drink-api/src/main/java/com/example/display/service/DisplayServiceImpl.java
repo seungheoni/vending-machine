@@ -2,7 +2,7 @@ package com.example.display.service;
 
 import com.example.display.repo.DisplayRepository;
 import com.example.mongo.model.Display;
-import com.example.mongo.model.DisplayDrinkResult;
+import com.example.display.dto.DisplayDrinkView;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -16,7 +16,7 @@ public class DisplayServiceImpl implements DisplayService {
     private final DisplayRepository displayRepository;
 
     @Override
-    public List<DisplayDrinkResult> GetDrinkAllList() {
+    public List<DisplayDrinkView> GetDrinkAllList() {
         List<Display> result = displayRepository.findWithDrink();
         return result.stream().map(Display::toDisplayDrinkResult).collect(Collectors.toList());
     }
