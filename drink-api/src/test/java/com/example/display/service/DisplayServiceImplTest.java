@@ -1,12 +1,16 @@
 package com.example.display.service;
 
 import com.example.display.dto.DisplayDrinkView;
+import com.example.display.repo.DisplayRepository;
+import com.example.mongo.model.Display;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.bson.types.ObjectId;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.List;
@@ -18,23 +22,26 @@ import static org.mockito.Mockito.when;
 class DisplayServiceImplTest {
 
     @Mock
-    private DisplayService displayService;
+    private DisplayRepository displayRepository;
+
+    @InjectMocks
+    private DisplayServiceImpl displayServiceImpl;
 
     @BeforeEach
     public void setUp() {
 
-        when(displayService.GetDrinkAllList())
+        when(displayRepository.findWithDrink())
                 .thenReturn(List.of(
-                        DisplayDrinkView.of("콜라", 1),
-                        DisplayDrinkView.of("식혜", 2),
-                        DisplayDrinkView.of("사이다", 3)));
+                        Display.of(1,"콜라"),
+                        Display.of(2,"식혜"),
+                        Display.of(3,"사이다")));
     }
 
     @Test
     @DisplayName("DisplayService GetDrinkAllList 호출")
     public void GetDrinkAllListTest() throws JsonProcessingException {
 
-        List<DisplayDrinkView> displayDrinkViewList = displayService.GetDrinkAllList();
+        List<DisplayDrinkView> displayDrinkViewList = displayServiceImpl.GetDrinkAllList();
         assertEquals(3,displayDrinkViewList.size());
 
         ObjectMapper objectMapper = new ObjectMapper();

@@ -42,6 +42,10 @@ public class Display {
         return new Display(null, position, drinkId, null);
     }
 
+    public static Display of(int position, String drinkName) {
+        return new Display(ObjectId.get(), position, ObjectId.get(), List.of(Drink.of(drinkName,2000,5)));
+    }
+
     /**
      * 전시 음료결과 데이터 변환
      */
