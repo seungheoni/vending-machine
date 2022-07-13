@@ -1,11 +1,10 @@
 package com.example.display.service;
 
 import com.example.display.dto.DisplayDrinkView;
+import com.example.display.fixture.DisplayFixture;
 import com.example.display.repo.DisplayRepository;
-import com.example.mongo.model.Display;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.bson.types.ObjectId;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -14,27 +13,19 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 class DisplayServiceImplTest {
 
     @Mock
     private DisplayRepository displayRepository;
-
     @InjectMocks
     private DisplayServiceImpl displayServiceImpl;
 
     @BeforeEach
-    public void setUp() {
-
-        when(displayRepository.findWithDrink())
-                .thenReturn(List.of(
-                        Display.of(1,"콜라"),
-                        Display.of(2,"식혜"),
-                        Display.of(3,"사이다")));
+    void setUp() {
+        DisplayFixture.displayRepositoryStubbing(displayRepository);
     }
 
     @Test
