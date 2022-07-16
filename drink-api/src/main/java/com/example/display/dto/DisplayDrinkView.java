@@ -11,7 +11,7 @@ import org.bson.types.ObjectId;
 @AllArgsConstructor
 public class DisplayDrinkView {
 
-    private ObjectId id;
+    private ObjectId drinkId;
     private int position;
     private Status status;
     private String name;
