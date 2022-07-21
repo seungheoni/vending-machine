@@ -1,12 +1,10 @@
 package com.example.display.fixture;
 
-import com.example.display.repo.DisplayRepository;
 import com.example.mongo.model.Display;
 import com.example.mongo.model.Drink;
 import org.bson.types.ObjectId;
 import java.util.List;
 
-import static org.mockito.Mockito.when;
 
 public class DisplayFixture {
 
