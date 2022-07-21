@@ -1,7 +1,7 @@
 
 plugins{
     // to share test fixture
-   ㄱ id "java-test-fixtures"
+    id "java-test-fixtures"
 }
 
 jar {
