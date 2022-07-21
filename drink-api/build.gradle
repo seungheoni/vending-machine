@@ -1,4 +1,11 @@
 
+plugins{
+    // to share test fixture
+    id "java-library"
+    id "java-test-fixtures"
+    id "maven-publish"
+}
+
 jar {
     enabled = true
     archiveName 'DRINK.API.jar'
@@ -10,4 +17,8 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
     testImplementation 'org.testcontainers:mongodb:1.17.2'
+}
+
+test {
+    useJUnitPlatform()
 }
