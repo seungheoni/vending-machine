@@ -1,8 +1,8 @@
 package com.example.display.service;
 
-import com.example.display.dto.DisplayDrinkView;
 import com.example.display.fixture.DisplayFixture;
 import com.example.display.repo.DisplayRepository;
+import com.example.mongo.model.Display;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
@@ -29,13 +29,10 @@ class DisplayServiceImplTest {
     }
 
     @Test
-    @DisplayName("DisplayService GetDrinkAllList 호출")
+    @DisplayName("DisplayService getDrinkAllList 호출")
     public void GetDrinkAllListTest() throws JsonProcessingException {
 
-        List<DisplayDrinkView> displayDrinkViewList = displayServiceImpl.GetDrinkAllList();
+        List<Display> displayDrinkViewList = displayServiceImpl.getDrinkAllList();
         assertEquals(3,displayDrinkViewList.size());
-
-        ObjectMapper objectMapper = new ObjectMapper();
-        System.out.println(objectMapper.writeValueAsString(displayDrinkViewList));
     }
 }
