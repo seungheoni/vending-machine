@@ -29,7 +29,7 @@ public class DisplayController {
     @GetMapping(path = "/display", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<DisplayDrinkView> drinkDisplay() {
 
-        List<Display> result = displayService.getDrinkAllList();
+        List<Display> result = displayService.getDisplayDrinks();
         return result.stream().map(Display::toDisplayDrinkResult).collect(Collectors.toList());
     }
 

@@ -15,7 +15,6 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 
-import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 import java.util.List;
@@ -40,9 +39,9 @@ public class DisplayControllerTest {
     private DisplayService displayService;
 
     @Test
-    public void drinksService() throws Exception {
+    public void 테스트() throws Exception {
 
-        when(displayService.getDrinkAllList())
+        when(displayService.getDisplayDrinks())
                 .thenReturn(List.of(DisplayFixture.of(1, "콜라"), DisplayFixture.of(2, "식혜"), DisplayFixture.of(3, "사이다")));
 
         mvc.perform(get("/drinks/display") //해당 url로 요청을 한다.

@@ -5,5 +5,5 @@ import com.example.mongo.model.Display;
 import java.util.List;
 
 public interface DisplayService {
-    List<Display> getDrinkAllList();
+    List<Display> getDisplayDrinks();
 }

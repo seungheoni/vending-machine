@@ -14,7 +14,7 @@ public class DisplayServiceImpl implements DisplayService {
     private final DisplayRepository displayRepository;
 
     @Override
-    public List<Display> getDrinkAllList() {
+    public List<Display> getDisplayDrinks() {
         return displayRepository.findWithDrink();
     }
 }
