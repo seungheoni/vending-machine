@@ -30,7 +30,7 @@ class DisplayServiceImplTest {
 
     @Test
     @DisplayName("DisplayService getDrinkAllList 호출")
-    public void GetDrinkAllListTest() throws JsonProcessingException {
+    public void getDrinkAllListTest() throws JsonProcessingException {
 
         List<Display> displayDrinkViewList = displayServiceImpl.getDrinkAllList();
         assertEquals(3,displayDrinkViewList.size());

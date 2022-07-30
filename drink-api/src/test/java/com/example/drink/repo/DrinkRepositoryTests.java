@@ -74,7 +74,7 @@ public class DrinkRepositoryTests {
     }
 
     @Test
-    public void DeleteOne() {
+    public void deleteOne() {
 
         Optional<Drink> sida = drinkRepository.findByName("사이다");
         assertNotNull(sida);

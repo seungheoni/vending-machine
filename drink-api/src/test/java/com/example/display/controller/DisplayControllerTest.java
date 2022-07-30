@@ -20,6 +20,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -51,9 +52,7 @@ public class DisplayControllerTest {
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(result -> {
                     byte[] content = result.getResponse().getContentAsByteArray();
-                    List<DisplayDrinkView> results = objectMapper.readValue(content, new TypeReference<>() {
-                    });
-                    assertThat(results.get(0), isA(DisplayDrinkView.class));
+                    assertDoesNotThrow(() -> {List<DisplayDrinkView> results = objectMapper.readValue(content, new TypeReference<>() {}); });
                 });
     }
 }
