@@ -1,14 +1,12 @@
 package com.example.display.dto;
 
 import com.example.drink.enums.Status;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.ToString;
+import lombok.*;
 import org.bson.types.ObjectId;
 
 @Data
-@ToString
 @AllArgsConstructor
+@NoArgsConstructor(force = true, access = AccessLevel.PRIVATE)
 public class DisplayDrinkView {
 
     private ObjectId drinkId;
