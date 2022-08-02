@@ -12,5 +12,21 @@ dependencies {
     implementation project(':drink-api');
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
     implementation 'org.springframework.boot:spring-boot-starter-web'
-    implementation 'org.springdoc:springdoc-openapi-javadoc:1.6.9'
+
+    implementation 'org.springdoc:springdoc-openapi-ui:1.6.9'
+
+    // java 주석사용 관련 연구필요.
+    //implementation 'org.springdoc:springdoc-openapi-javadoc:1.6.9'
+    //implementation 'com.github.therapi:therapi-runtime-javadoc:0.13.0'
+}
+
+openApi {
+    outputDir.set(file("$buildDir/openapi"))  // 생성된 파일 저장 위치
+
+    // json 방식 (default)
+    apiDocsUrl.set("http://localhost:8080/v3/api-docs")  // 소스 코드에서 만들어진 json 내용
+    outputFileName.set('openapi.json')  // json 내용으로부터 생성되는 json 파일 이름
+    // yaml 방식
+//    apiDocsUrl.set("http://localhost:8080/v3/api-docs.yaml")  // 소스 코드에서 만들어진 yaml 내용
+//    outputFileName.set("openapi.yml")  // yaml 내용으로부터 생성되는 yaml 파일 이름
 }
