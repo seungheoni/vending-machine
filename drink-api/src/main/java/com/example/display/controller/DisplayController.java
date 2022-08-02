@@ -17,9 +17,6 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class DisplayController {
 
-    /**
-     * DrinkService -> DisplayService
-     */
     private final DisplayService displayService;
 
     /**
