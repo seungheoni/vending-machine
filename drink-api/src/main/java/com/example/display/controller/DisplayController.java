@@ -3,6 +3,7 @@ package com.example.display.controller;
 import com.example.display.service.DisplayService;
 import com.example.display.dto.DisplayDrinkView;
 import com.example.mongo.model.Display;
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,6 +24,8 @@ public class DisplayController {
      * 상품 진열
      * @author ued123
      */
+
+    @Operation(summary = "상품 진열")
     @GetMapping(path = "/display", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<DisplayDrinkView> drinkDisplay() {
 
