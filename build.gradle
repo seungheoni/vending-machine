@@ -33,10 +33,15 @@ subprojects {
     }
 
     dependencies {
-        implementation 'org.springframework.boot:spring-boot-devtools'
+
+        annotationProcessor 'org.projectlombok:lombok'
+        annotationProcessor 'com.github.therapi:therapi-runtime-javadoc-scribe:0.15.0'
 
         compileOnly 'org.projectlombok:lombok'
-        annotationProcessor 'org.projectlombok:lombok'
+        implementation 'org.springframework.boot:spring-boot-devtools'
+        implementation 'org.springdoc:springdoc-openapi-ui:1.6.10'
+        implementation 'org.springdoc:springdoc-openapi-javadoc:1.6.10'
+        implementation 'com.github.therapi:therapi-runtime-javadoc:0.15.0'
 
         testImplementation 'org.springframework.boot:spring-boot-starter-test'
         testImplementation 'org.testcontainers:testcontainers:1.16.3'

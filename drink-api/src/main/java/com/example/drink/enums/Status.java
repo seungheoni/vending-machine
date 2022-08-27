@@ -2,5 +2,12 @@ package com.example.drink.enums;
 
 public enum Status {
 
-    SOLDOUT,AVAILABLE
+    /**
+     * 품절
+     */
+    SOLDOUT,
+    /**
+     * 판매중
+     */
+    AVAILABLE
 }
