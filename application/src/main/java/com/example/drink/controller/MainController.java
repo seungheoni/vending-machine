@@ -11,6 +11,7 @@ public class MainController {
 
         model.addAttribute("name","음료수 자판기");
 
+
         return "mainframe";
     }
 }
