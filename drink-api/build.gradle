@@ -9,7 +9,6 @@ version = 'v01'
 
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
-    implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
 
     testImplementation 'org.testcontainers:mongodb:1.17.2'
 }
