@@ -6,4 +6,6 @@ db.createUser(
     }
 );
 db.createCollection("drink");
-
+db.createCollection("display");
+db.createCollection("cash");
+db.createCollection("transaction");
