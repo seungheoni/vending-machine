@@ -37,4 +37,8 @@ public class Cash {
      */
     @LastModifiedDate
     private Instant updateDate;
+
+    public static Cash of(long balance) {
+        return new Cash(ObjectId.get(),balance,Instant.now(),Instant.now());
+    };
 }
