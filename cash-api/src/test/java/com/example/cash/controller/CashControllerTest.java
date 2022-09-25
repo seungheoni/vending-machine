@@ -15,11 +15,8 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 
-import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -40,18 +37,18 @@ class CashControllerTest {
     @Test
     public void cashDeposit() throws Exception {
 
-//        when(cashService.deposit())
-//                .thenReturn(new CashDepositView(1000L));
-//
-//        mvc.perform(put("/cash/deposit")
-//                .contentType(MediaType.APPLICATION_JSON)
-//                        .content(objectMapper.writeValueAsBytes(new CashDepositPayLoad(1000L)))
-//                .andExpect(status().isOk())
-//                .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-//                .andExpect(result -> {
-//                    byte[] content = result.getResponse().getContentAsByteArray();
-//                    assertDoesNotThrow(() -> {List<CashDepositView> results = objectMapper.readValue(content, new TypeReference<>() {}); });
-//                });
+        when(cashService.deposit())
+                .thenReturn(new CashDepositView(1000L));
+
+        mvc.perform(put("/cash/deposit")
+                .contentType(MediaType.APPLICATION_JSON_VALUE)
+                .content(objectMapper.writeValueAsBytes(new CashDepositPayLoad(1000L))))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
+                .andExpect(result -> {
+                    byte[] content = result.getResponse().getContentAsByteArray();
+                    assertDoesNotThrow(() -> {CashDepositView results = objectMapper.readValue(content, new TypeReference<>() {}); });
+                });
     }
 
 }
