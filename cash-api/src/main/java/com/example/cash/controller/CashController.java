@@ -26,6 +26,6 @@ public class CashController {
     @Operation(summary = "금액 입금")
     @PutMapping(value = "/deposit", consumes = MediaType.APPLICATION_JSON_VALUE,produces = MediaType.APPLICATION_JSON_VALUE)
     public CashDepositView cashDeposit(@RequestBody CashDepositPayLoad cashDepositPayLoad) {
-        return cashService.deposit();
+        return cashService.deposit(cashDepositPayLoad);
     }
 }

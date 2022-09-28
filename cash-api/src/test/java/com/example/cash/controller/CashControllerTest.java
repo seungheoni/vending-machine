@@ -33,11 +33,11 @@ class CashControllerTest {
     @MockBean
     private CashService cashService;
 
-    @DisplayName("CashController deposit(금액 입금) api 테스트")
+    @DisplayName("deposit(금액 입금) 1000원을 넣었다고 했을시에 1000원의 금액이 저장")
     @Test
     public void cashDeposit() throws Exception {
 
-        when(cashService.deposit())
+        when(cashService.deposit(new CashDepositPayLoad(1000L)))
                 .thenReturn(new CashDepositView(1000L));
 
         mvc.perform(put("/cash/deposit")
