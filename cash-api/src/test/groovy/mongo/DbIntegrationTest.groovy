@@ -1,13 +1,17 @@
 package mongo
 
 import com.example.mongo.config.MongoConfigurer
+import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest
 import org.springframework.test.context.ContextConfiguration
 import org.springframework.test.context.DynamicPropertyRegistry
 import org.springframework.test.context.DynamicPropertySource
 import org.testcontainers.containers.MongoDBContainer
+import org.testcontainers.spock.Testcontainers
 import org.testcontainers.utility.DockerImageName
 import spock.lang.Specification
 
+@Testcontainers
+@DataMongoTest
 @ContextConfiguration(classes = [MongoConfigurer.class])
 class DbIntegrationTest extends Specification{
 
