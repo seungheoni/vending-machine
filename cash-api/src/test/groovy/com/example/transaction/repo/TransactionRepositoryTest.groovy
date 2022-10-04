@@ -5,7 +5,7 @@ import com.example.mongo.model.TransactionType
 import mongo.DbIntegrationTest
 import org.springframework.beans.factory.annotation.Autowired
 
-class 가 extends DbIntegrationTest {
+class TransactionRepositoryTest extends DbIntegrationTest {
 
     @Autowired
     TransactionRepository transactionRepository
