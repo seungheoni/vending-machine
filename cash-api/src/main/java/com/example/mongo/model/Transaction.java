@@ -8,6 +8,7 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.MongoId;
 
+import javax.validation.constraints.PositiveOrZero;
 import java.time.Instant;
 
 @Document
@@ -29,6 +30,7 @@ public class Transaction {
     /**
      * 금액
      */
+    @PositiveOrZero
     private Long amount;
 
     /**
