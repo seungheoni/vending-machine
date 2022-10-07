@@ -15,7 +15,7 @@ class TransactionServiceTest extends Specification {
         given: "5000원의 입금 내역 데이터를 생성"
         Transaction expected = TransactionBuilder.make {
             type TransactionType.DEPOSIT
-            amount 4000
+            amount 5000
         }.build()
         when: "transactionRepository.save() 수행한 경우"
         transactionRepository.save({ expected } as Transaction) >> expected
