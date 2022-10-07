@@ -1,4 +1,4 @@
-package io.hobbyful.accountservice.config
+package com.example.transaction.config
 
 import io.kotest.core.annotation.AutoScan
 import io.kotest.core.listeners.AfterProjectListener
