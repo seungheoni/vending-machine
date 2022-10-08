@@ -6,63 +6,40 @@
     <title>HTML Result</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
           integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+    <link rel="stylesheet" href="/static/css/mainframe.css" crossorigin="anonymous">
 </head>
 <body>
 <div class="container body-content">
     <div class="container">
-        <div class="row justify-content-start" style="padding-top:10px;">
-
-            <div class="col" style="padding-top:10px;">
-                <img alt="Image html" width="90%" height="90%" style="max-height:500px;max-width:500px;" src="static/img/coke.jpeg" />
-                <input class="form-control" value="5000원" readonly></input>
-                <input class="form-control" value="품절" readonly></input>
-            </div>
-            <div class="col" style="padding-top:10px;">
-                <img alt="Image html" width="90%" height="90%" style="max-height:500px;max-width:500px;" src="static/img/coke.jpeg" />
-                <input class="form-control"></input>
-                <input class="form-control"></input>
-            </div>
-            <div class="col" style="padding-top:10px;">
-                <img alt="Image html" width="90%" height="90%" style="max-height:500px;max-width:500px;" src="static/img/coke.jpeg" />
-                <input class="form-control"></input>
-                <input class="form-control"></input>
-            </div>
-            <div class="col" style="padding-top:10px;">
-                <img alt="Image html" width="90%" height="90%" style="max-height:500px;max-width:500px;" src="static/img/sida.jpeg" />
-                <input class="form-control"></input>
-                <input class="form-control"></input>
-            </div>
+        <div id="top_div" class="row justify-content-start" style="padding-top:10px;">
+            <th:block th:each="num : ${#numbers.sequence(1,5)}">
+                <div class="col" style="padding-top:10px;">
+                    <img alt="Image html" width="90%" height="90%" style="max-height:500px;max-width:500px;" src="/static/img/coke.jpeg" />
+                    <input type="text" value="1000" class="product_name" readonly></input>
+                    <img src="/static/img/green_button.png" width="190" height="50" alt="">
+<!--                        <th:block th:if="${info.useYn == 'Y'}">-->
+<!--                            <img src="/static/img/green_button.png" width="180" height="50" alt="">-->
+<!--                        <th:block>-->
+                </div>
+            </th:block>
         </div>
-        <div class="row justify-content-start" style="padding-top:70px;">
-
-            <div class="col" style="padding-top:10px;">
-                <img alt="Image html" width="90%" height="90%" style="max-height:500px;max-width:500px;" src="static/img/sida.jpeg" />
-                <input class="form-control"></input>
-                <input class="form-control"></input>
-            </div>
-            <div class="col" style="padding-top:10px;">
-                <img alt="Image html" width="90%" height="90%" style="max-height:500px;max-width:500px;" src="static/img/sikhye.jpeg" />
-                <input class="form-control"></input>
-                <input class="form-control"></input>
-            </div>
-            <div class="col" style="padding-top:10px;">
-                <img alt="Image html" width="90%" height="90%" style="max-height:500px;max-width:500px;" src="static/img/sikhye.jpeg" />
-                <input class="form-control"></input>
-                <input class="form-control"></input>
-            </div>
-            <div class="col" style="padding-top:10px;">
-                <img alt="Image html" width="90%" height="90%" style="max-height:500px;max-width:500px;" src="https://sketch2code.azurewebsites.net/Content/img/fake_img.svg" />
-                <input class="form-control"></input>
-                <input class="form-control"></input>
-            </div>
+        <div id="bottom_div" class="row justify-content-start" style="padding-top:70px;">
+            <th:block th:each="num : ${#numbers.sequence(1,5)}">
+                <div class="col" style="padding-top:10px;">
+                    <img alt="Image html" width="90%" height="90%" style="max-height:500px;max-width:500px;" src="/static/img/sida.jpeg" />
+                    <input type="text" value="1000" class="product_name" readonly></input>
+                    <img src="/static/img/green_button.png" width="190" height="50" alt="">
+                </div>
+            </th:block>
         </div>
         <div class="row justify-content-start" style="padding-top:10px;">
             <div class="col" style="padding-top:70px;">
-                <img alt="Image html" width="90%" height="90%" style="max-height:500px;max-width:500px;" src="https://sketch2code.azurewebsites.net/Content/img/fake_img.svg" />
+                <img alt="Image html" width="90%" height="90%" style="max-height:500px;max-width:500px;" src="/static/img/black_space.jpeg" />
             </div>
-            <div class="col" style="padding-top:70px;">
-                <input class="form-control"></input>
-                <input class="form-control"></input>
+            <div class="col" style="padding-top:100px;">
+                <input class="amount_input" type="text" placeholder="잔액 0원" readonly></input>
+                <input class="deposit_input" type="text" placeholder="금액을 입력하시오."></input><button class="deposit_btn">금액 투입</button>
+                <input class="change_input" type="text" placeholder="거스름돈 0원" readonly></input>
             </div>
         </div>
         <div class="row justify-content-center" style="padding-top:10px;">
@@ -71,5 +48,7 @@
     </div>
 
 </div>
+
+<script type="text/javascript" src="/static/js/mainframe.js"></script>
 </body>
 </html>
