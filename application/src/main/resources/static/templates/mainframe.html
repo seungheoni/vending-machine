@@ -12,22 +12,19 @@
 <div class="container body-content">
     <div class="container">
         <div id="top_div" class="row justify-content-start" style="padding-top:10px;">
-            <th:block th:each="num : ${#numbers.sequence(1,5)}">
-                <div class="col" style="padding-top:10px;">
-                    <img alt="Image html" width="90%" height="90%" style="max-height:500px;max-width:500px;" src="/static/img/coke.jpeg" />
-                    <input type="text" value="1000" class="product_name" readonly></input>
+            <th:block th:each="position_num : ${#numbers.sequence(1,5)}">
+                <div th:name="${'position_'+position_num}" class="col" style="padding-top:10px;">
+                    <img alt="음료수" width="90%" height="90%" style="max-height:500px;max-width:500px;" src="/static/img/sold_out.png" />
+                    <input type="text" value="0000" class="product_name" readonly></input>
                     <img src="/static/img/green_button.png" width="190" height="50" alt="">
-<!--                        <th:block th:if="${info.useYn == 'Y'}">-->
-<!--                            <img src="/static/img/green_button.png" width="180" height="50" alt="">-->
-<!--                        <th:block>-->
                 </div>
             </th:block>
         </div>
         <div id="bottom_div" class="row justify-content-start" style="padding-top:70px;">
-            <th:block th:each="num : ${#numbers.sequence(1,5)}">
-                <div class="col" style="padding-top:10px;">
-                    <img alt="Image html" width="90%" height="90%" style="max-height:500px;max-width:500px;" src="/static/img/sida.jpeg" />
-                    <input type="text" value="1000" class="product_name" readonly></input>
+            <th:block th:each="position_num : ${#numbers.sequence(6,10)}">
+                <div th:name="${'position_'+position_num}" class="col" style="padding-top:10px;">
+                    <img alt="음료수" width="90%" height="90%" style="max-height:500px;max-width:500px;" src="/static/img/sold_out.png" />
+                    <input type="text" value="0000" class="product_name" readonly></input>
                     <img src="/static/img/green_button.png" width="190" height="50" alt="">
                 </div>
             </th:block>
@@ -38,12 +35,9 @@
             </div>
             <div class="col" style="padding-top:100px;">
                 <input class="amount_input" type="text" placeholder="잔액 0원" readonly></input>
-                <input class="deposit_input" type="text" placeholder="금액을 입력하시오."></input><button class="deposit_btn">금액 투입</button>
+                <input class="deposit_input" type="text" placeholder="금액을 입력하시오."></input><button class="deposit_btn">금액 투입</button><button class="change_btn">반환</button>
                 <input class="change_input" type="text" placeholder="거스름돈 0원" readonly></input>
             </div>
-        </div>
-        <div class="row justify-content-center" style="padding-top:10px;">
-            <input class="form-control"></input>
         </div>
     </div>
 
