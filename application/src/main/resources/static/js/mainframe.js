@@ -14,9 +14,9 @@ window.onload = function() {
                 response.filter(e => e.status === "AVAILABLE").forEach(function(r){
 
                     if(r.position > 5) {
-                        bottom_div.children.item(r.position+1).querySelector("img").src = img_path + r.name +".png"
+                        bottom_div.children.item(r.position-1).querySelector("img").src = img_path + r.name +".png"
                     } else {
-                        top_div.children.item(r.position+1).querySelector("img").src = img_path + r.name +".png"
+                        top_div.children.item(r.position-1).querySelector("img").src = img_path + r.name +".png"
                     }
 
                 });
