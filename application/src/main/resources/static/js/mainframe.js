@@ -1,41 +1,34 @@
+var top_div = document.getElementById("top_div");
+var bottom_div = document.getElementById("bottom_div");
+var img_path = "/static/img/"
+
 window.onload = function() {
 
+    var httpRequest = new XMLHttpRequest();
+    httpRequest.onreadystatechange = () => {
 
-    document.querySelectorAll(".drinkCheckBox").forEach(function (element) {
-        element.addEventListener("click",() => {
-            document.querySelectorAll(".drinkCheckBox").forEach(function (element) {
-                element.disabled = true;
-            });
-        });
-    });
+        if (httpRequest.readyState === XMLHttpRequest.DONE) {
+            if (httpRequest.status === 200) {
+                let response = JSON.parse(httpRequest.response);
 
-    var httpRequest;
-    document.querySelector("#itemBuyCall").addEventListener('click', () => {
+                response.filter(e => e.status === "AVAILABLE").forEach(function(r){
 
-        var selectedDrinkName = document.querySelector(".drinkCheckBox:checked").value;
-        var amount = document.querySelector("#amount").value;
+                    if(r.position > 5) {
+                        bottom_div.children.item(r.position-1).querySelector("img").src = img_path + r.name +".png"
+                    } else {
+                        top_div.children.item(r.position-1).querySelector("img").src = img_path + r.name +".png"
+                    }
 
-        httpRequest = new XMLHttpRequest();
-        httpRequest.onreadystatechange = () => {
+                });
 
-            if (httpRequest.readyState === XMLHttpRequest.DONE) {
-                if (httpRequest.status === 200) {
-                    let response = JSON.parse(httpRequest.response);
-                    const element = document.querySelector('#receipt');
-                    element.innerHTML =
-                        '<h3>영수증</h3>' +
-                        '<p> 구매하신 음료수 :' + response.drinkName + '</p>' +
-                        '<p> 지불하신 금액 :' + response.drinkPrice + '</p>';
-                } else {
-                    alert('Request Error!');
-                }
+            } else {
+                alert('서버 에러가 발생하였습니다.');
             }
-        };
+        }
+    };
 
-        httpRequest.open('POST', '/drink_buy.json');
-        httpRequest.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-        httpRequest.send(JSON.stringify({ "drinkName": selectedDrinkName , "drinkPrice" : amount}));
-    });
+    httpRequest.open('GET', '/drinks/display');
+    httpRequest.send();
 }
 
 
