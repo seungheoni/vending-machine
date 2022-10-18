@@ -12,8 +12,10 @@ import io.mockk.every
 import org.bson.types.ObjectId
 import org.springframework.boot.test.autoconfigure.web.reactive.AutoConfigureWebTestClient
 import org.springframework.boot.test.context.SpringBootTest
+import org.springframework.http.MediaType
 import org.springframework.test.web.reactive.server.WebTestClient
 import org.springframework.test.web.reactive.server.expectBody
+import reactor.core.publisher.Mono
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureWebTestClient
@@ -23,11 +25,14 @@ class DisplayControllerTest(
 ) : BehaviorSpec({
 
     Given("/drinks/display 테스트") {
-        When("cashService 0원인 상"){
-            val displays = DisplayDrinkView(ObjectId.get(),0,Status.SOLDOUT,"콜라",1000L)
-            Then("C"){
+        When("cashService 0원인 상태"){
+            val displayDrinkView = listOf<DisplayDrinkView>(DisplayDrinkView(ObjectId.get(),1,Status.AVAILABLE,"콜라",1000))
+            Then("요청하면 displaydrinkview 형태의 음료수 전시 데이터를 리턴한다."){
                 every { displayService.displayDrinks } returns listOf((display {
                     id = ObjectId.get()
+                    position = 1
+                    drinkId = ObjectId.get()
+                    drinks = listOf<Drink>(Drink.of("콜라", 1000,5));
                 }))
 
                 webTestClient
@@ -35,9 +40,9 @@ class DisplayControllerTest(
                     .uri("/drinks/display")
                     .exchange()
                     .expectStatus().isOk
-                    .expectBody<DisplayDrinkView>()
-                    .isEqualTo(displays)
-
+                    .expectHeader().contentType(MediaType.APPLICATION_JSON)
+                    .expectBody<List<DisplayDrinkView>>()
+                    //.isEqualTo(displayDrinkView)
             }
         }
     }
