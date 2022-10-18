@@ -2,7 +2,9 @@ package com.example.display.service
 
 import com.example.display.repo.DisplayRepository
 import com.example.mongo.model.Display
+import io.kotest.assertions.assertSoftly
 import io.kotest.core.spec.style.BehaviorSpec
+import io.kotest.matchers.types.shouldBeInstanceOf
 import io.mockk.clearAllMocks
 import io.mockk.every
 import io.mockk.mockk
@@ -24,7 +26,10 @@ class DisplayServiceTest: BehaviorSpec ({
             } returns listOf(Display.of(1,ObjectId.get()))
             val result = displayServiceImpl.displayDrinks
             Then("drink 컬렉션과 룩업된 Display 객체 리스트를 반환한다.") {
-                result is List<Display>
+                assertSoftly {
+                    result.shouldBeInstanceOf<List<Display>>()
+                    result[0].shouldBeInstanceOf<Display>()
+                }
             }
         }
     }
