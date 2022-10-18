@@ -26,7 +26,6 @@ class DisplayControllerTest(
 
     Given("/drinks/display 테스트") {
         When("cashService 0원인 상태"){
-            val displayDrinkView = listOf<DisplayDrinkView>(DisplayDrinkView(ObjectId.get(),1,Status.AVAILABLE,"콜라",1000))
             Then("요청하면 displaydrinkview 형태의 음료수 전시 데이터를 리턴한다."){
                 every { displayService.displayDrinks } returns listOf((display {
                     id = ObjectId.get()
@@ -42,7 +41,6 @@ class DisplayControllerTest(
                     .expectStatus().isOk
                     .expectHeader().contentType(MediaType.APPLICATION_JSON)
                     .expectBody<List<DisplayDrinkView>>()
-                    //.isEqualTo(displayDrinkView)
             }
         }
     }
