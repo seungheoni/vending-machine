@@ -11,12 +11,12 @@ window.onload = function() {
             if (httpRequest.status === 200) {
                 let response = JSON.parse(httpRequest.response);
 
-                response.filter(e => e.status === "AVAILABLE").forEach(function(r){
+                response.filter(e => e.status === "AVAILABLE").forEach(function(drink){
 
-                    if(r.position > 5) {
-                        bottom_div.children.item(r.position-1).querySelector("img").src = img_path + r.name +".png"
+                    if(drink.position < 5) {
+                        drinkDivInit(drink,top_div.children.item(drink.position-1))
                     } else {
-                        top_div.children.item(r.position-1).querySelector("img").src = img_path + r.name +".png"
+                        drinkDivInit(drink,bottom_div.children.item(drink.position-1))
                     }
 
                 });
@@ -31,4 +31,7 @@ window.onload = function() {
     httpRequest.send();
 }
 
-
+function drinkDivInit(drink,divItem) {
+    divItem.querySelector("img").src = img_path + drink.name +".png"
+    divItem.querySelector(".product_price").value = drink.price + "원"
+}

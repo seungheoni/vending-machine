@@ -15,7 +15,7 @@
             <th:block th:each="position_num : ${#numbers.sequence(1,5)}">
                 <div th:name="${'position_'+position_num}" class="col" style="padding-top:10px;">
                     <img alt="음료수" width="90%" height="90%" style="max-height:500px;max-width:500px;" src="/static/img/sold_out.png" />
-                    <input type="text" value="0000" class="product_name" readonly></input>
+                    <input type="text" value="0000" class="product_price" readonly></input>
                     <img src="/static/img/green_button.png" width="190" height="50" alt="">
                 </div>
             </th:block>
@@ -24,12 +24,12 @@
             <th:block th:each="position_num : ${#numbers.sequence(6,10)}">
                 <div th:name="${'position_'+position_num}" class="col" style="padding-top:10px;">
                     <img alt="음료수" width="90%" height="90%" style="max-height:500px;max-width:500px;" src="/static/img/sold_out.png" />
-                    <input type="text" value="0000" class="product_name" readonly></input>
+                    <input type="text" value="0000" class="product_price" readonly></input>
                     <img src="/static/img/green_button.png" width="190" height="50" alt="">
                 </div>
             </th:block>
         </div>
-        <div class="row justify-content-start" style="padding-top:10px;">
+        <div class="row justify-content-start" style="padding-top:70px;">
             <div class="col" style="padding-top:70px;">
                 <img alt="Image html" width="90%" height="90%" style="max-height:500px;max-width:500px;" src="/static/img/black_space.jpeg" />
             </div>
