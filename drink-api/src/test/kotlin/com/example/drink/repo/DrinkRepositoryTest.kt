@@ -22,8 +22,8 @@ class DrinkRepositoryTest(
     }
 
     Given("drink repository 삭제 테스트") {
-        val drink = Drink.of("콜라",1000,10)
-       drinkRepository.save(drink)
+        val drink = Drink.of("콜라", 1000, 10)
+            .let(drinkRepository::save)
         When("콜라(drink) 상품 삭제하면") {
             val result = drinkRepository.delete(drink)
             Then("성공시 void를 반환한다.") {
@@ -33,8 +33,8 @@ class DrinkRepositoryTest(
     }
 
     Given("drink repository 조회 테스트") {
-        val drink = Drink.of("콜라",1000,10)
-        drinkRepository.save(drink)
+        val drink = Drink.of("콜라", 1000, 10)
+            .let(drinkRepository::save)
         When("콜라(drink) 상품 조회하면") {
             val result = drinkRepository.findById(drink.id)
             Then("아까 저장한 콜라(drink)를 반환한다.") {
