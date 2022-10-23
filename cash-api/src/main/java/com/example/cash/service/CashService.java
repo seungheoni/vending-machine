@@ -5,5 +5,5 @@ import com.example.cash.dto.CashDepositView;
 
 public interface CashService {
 
-    CashDepositView deposit(CashDepositPayLoad cashDepositPayLoad);
+    CashDepositView deposit(Long amount);
 }
