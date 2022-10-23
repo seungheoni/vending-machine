@@ -26,7 +26,7 @@ class CashRepositoryTest(
         When("잔액 전체 데이터를 조회 하면") {
             val result = cashRepository.findAll()
             Then("거래 내역 리스트는 1개를 보여준다.") {
-                result.size shouldBe 1;
+                result.size shouldBe 1
             }
         }
     }
@@ -35,8 +35,8 @@ class CashRepositoryTest(
         cashRepository.deleteAll()
         val cash = cashRepository.save(Cash.of(1000L))
         When("조회된 잔액 데이터를 삭제 하고 전체 조회를 하면"){
-            cashRepository.delete(cash);
-            val result = cashRepository.findAll();
+            cashRepository.delete(cash)
+            val result = cashRepository.findAll()
             Then("결과 데이터는 0이 나온다.") {
                 result.size shouldBe 0
             }

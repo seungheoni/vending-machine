@@ -31,7 +31,7 @@ class DisplayControllerTest(
                     id = ObjectId.get()
                     position = 1
                     drinkId = ObjectId.get()
-                    drinks = listOf<Drink>(Drink.of("콜라", 1000,5));
+                    drinks = listOf<Drink>(Drink.of("콜라", 1000,5))
                 }))
 
                 webTestClient
