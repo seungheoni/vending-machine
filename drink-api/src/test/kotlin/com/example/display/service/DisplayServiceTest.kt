@@ -22,7 +22,7 @@ class DisplayServiceTest: BehaviorSpec ({
         When("displayServiceImpl의 displayDrinks 조회시") {
             val expected = listOf(Display.of(1,ObjectId.get()))
             every {
-                displayRepository.findWithDrink();
+                displayRepository.findWithDrink()
             } returns expected
             val result = displayServiceImpl.displayDrinks
             Then("drink 컬렉션과 룩업된 Display 객체 리스트를 반환한다.") {

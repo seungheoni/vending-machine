@@ -15,7 +15,7 @@ class DisplayRepositoryTest(
     Given("display 데이터 1개를 생성하고") {
         val display = Display.of(0, ObjectId.get())
         When("display 데이터 1개를 저장하면") {
-            val result = displayRepository.save(display);
+            val result = displayRepository.save(display)
             Then("1개의 Display를 성공적으로 반환한다.") {
                 result.shouldBeInstanceOf<Display>()
             }
@@ -26,7 +26,7 @@ class DisplayRepositoryTest(
         val display = Display.of(0, ObjectId.get())
         displayRepository.save(display)
         When("display 데이터 1개를 삭제하면") {
-            val result = displayRepository.delete(display);
+            val result = displayRepository.delete(display)
             Then("성공시 void를 반환한다.") {
                 result shouldBe kotlin.Unit
             }
