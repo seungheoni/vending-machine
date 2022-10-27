@@ -31,8 +31,8 @@ class CashServiceTest : BehaviorSpec({
             } returns expected
 
             every {
-                cashRepository.findAll()
-            } returns listOf(expected)
+                cashRepository.findFirstBy()
+            } returns expected
 
             every {
                 transactionServiceImpl.deposit(amount)

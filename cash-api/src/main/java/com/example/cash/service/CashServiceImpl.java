@@ -19,7 +19,7 @@ public class CashServiceImpl implements CashService {
     public CashDepositView deposit(final Long amount) {
 
         transactionService.deposit(amount);
-        Cash cash = cashRepository.findAll().get(0);
+        Cash cash = cashRepository.findFirstBy();
         cash.setBalance(cash.getBalance() + amount);
         cashRepository.save(cash);
         return CashDepositView.of(cash.getBalance());
