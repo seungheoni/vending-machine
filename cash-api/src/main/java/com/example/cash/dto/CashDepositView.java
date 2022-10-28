@@ -14,4 +14,8 @@ public class CashDepositView {
      * 현재 잔액
      */
     private long balance;
+
+    public static CashDepositView of(long amount) {
+        return new CashDepositView(amount);
+    }
 }

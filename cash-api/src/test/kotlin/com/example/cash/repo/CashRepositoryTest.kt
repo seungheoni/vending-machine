@@ -42,4 +42,15 @@ class CashRepositoryTest(
             }
         }
     }
+
+    Given("잔액 데이터 1000원이 존재하고") {
+        val cash = Cash.of(1000L)
+            .let(cashRepository::save)
+        When("findFirstBy를 사용하여 잔액 정보를 가져오면") {
+            val result = cashRepository.findFirstBy();
+            Then("남아있는 잔액 데이터를 1건을 가져온다. ") {
+                result.id shouldBe cash.id
+            }
+        }
+    }
 })
