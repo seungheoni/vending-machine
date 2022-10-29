@@ -1,8 +1,10 @@
 package com.example.error;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 
 import java.time.Instant;
@@ -11,6 +13,7 @@ import java.util.stream.Collectors;
 
 @Data
 @AllArgsConstructor
+@NoArgsConstructor(force = true, access = AccessLevel.PRIVATE)
 public class ErrorBody {
 
     private String message;
