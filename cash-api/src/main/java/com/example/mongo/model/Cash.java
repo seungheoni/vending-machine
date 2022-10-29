@@ -1,5 +1,6 @@
 package com.example.mongo.model;
 
+import com.example.cash.dto.CashDepositView;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.bson.types.ObjectId;
@@ -39,6 +40,28 @@ public class Cash {
     private Instant updateDate;
 
     public static Cash of(long balance) {
-        return new Cash(ObjectId.get(),balance,Instant.now(),Instant.now());
-    };
+        return new Cash(ObjectId.get(), balance, Instant.now(), Instant.now());
+    }
+
+    private Cash copy() {
+        return new Cash(id, balance, createDate, updateDate);
+    }
+
+    /**
+     * 입금하기
+     *
+     * @param amount 금액
+     */
+    public Cash deposit(long amount) {
+        Cash cash = copy();
+        cash.balance += amount;
+        return cash;
+    }
+
+    /**
+     * 입금 응답값 변환
+     */
+    public CashDepositView toCashDepositView() {
+        return new CashDepositView(balance);
+    }
 }
