@@ -17,11 +17,12 @@ public class CashServiceImpl implements CashService {
 
     @Override
     public CashDepositView deposit(final Long amount) {
-
-        transactionService.deposit(amount);
-        Cash cash = cashRepository.findFirstBy();
-        cash.setBalance(cash.getBalance() + amount);
-        cashRepository.save(cash);
-        return CashDepositView.of(cash.getBalance());
+        return cashRepository.findFirstBy()
+                .map(cash -> {
+                    transactionService.deposit(amount);
+                    return cash.deposit(amount);
+                }).map(cashRepository::save)
+                .map(Cash::toCashDepositView)
+                .orElseThrow();
     }
 }

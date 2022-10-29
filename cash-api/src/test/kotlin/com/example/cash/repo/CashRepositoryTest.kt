@@ -22,7 +22,7 @@ class CashRepositoryTest(
 
     Given("잔액 데이터 1개 존재한 상태에서") {
         cashRepository.deleteAll()
-        val result = cashRepository.save(Cash.of(1000L))
+        cashRepository.save(Cash.of(1000L))
         When("잔액 전체 데이터를 조회 하면") {
             val result = cashRepository.findAll()
             Then("거래 내역 리스트는 1개를 보여준다.") {
@@ -47,9 +47,9 @@ class CashRepositoryTest(
         val cash = Cash.of(1000L)
             .let(cashRepository::save)
         When("findFirstBy를 사용하여 잔액 정보를 가져오면") {
-            val result = cashRepository.findFirstBy();
+            val result = cashRepository.findFirstBy()
             Then("남아있는 잔액 데이터를 1건을 가져온다. ") {
-                result.id shouldBe cash.id
+                result.get().id shouldBe cash.id
             }
         }
     }
