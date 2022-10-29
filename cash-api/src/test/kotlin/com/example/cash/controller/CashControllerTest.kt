@@ -48,21 +48,19 @@ class CashControllerUnitTest(
             }
         }
 
-        When("cashService 0원인 상태에서 1000원을 넣으면 1000원 잔액 데이터를 보여준다") {
-            val cash = CashDepositView(1000L)
-            every { cashService.deposit(1000L) } returns CashDepositView(1000L)
-
-            Then("0원인 상태에서 payload 규격에 맞춘 1000원을 요청하면 잔액 1000원을 보여준다.") {
-
-                webTestClient
-                    .put()
-                    .uri("/cash/deposit")
-                    .contentType(MediaType.APPLICATION_JSON)
-                    .body(BodyInserters.fromValue(CashDepositPayLoad(-1L)))
-                    .exchange()
-                    .expectStatus().isOk
-                    .expectBody<CashDepositView>()
-                    .isEqualTo(cash)
+        When("입금하기 정상 처리된 경우") {
+            val amount = 1000L
+            val payload = CashDepositPayLoad(amount)
+            val expected = CashDepositView(amount)
+            every { cashService.deposit(amount) } returns expected
+            val exchange = cashDepositClient(payload)
+                .exchange()
+            Then("status: 200 Ok") {
+                exchange.expectStatus().isOk
+            }
+            Then("body: balance 는 1000원이다.") {
+                exchange.expectBody<CashDepositView>().returnResult()
+                    .responseBody!!.balance shouldBe amount
             }
         }
     }
