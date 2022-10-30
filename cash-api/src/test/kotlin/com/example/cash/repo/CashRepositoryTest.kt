@@ -4,6 +4,7 @@ import com.example.mongo.model.Cash
 import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.matchers.shouldBe
 import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest
+import java.util.*
 
 @DataMongoTest
 class CashRepositoryTest(
@@ -53,4 +54,14 @@ class CashRepositoryTest(
             }
         }
     }
+
+    Given("cash 데이터가 db에 존재하지 않을떄") {
+        When("cash 데이터를 조회하면") {
+            val cash : Optional<Cash> = cashRepository.findFirstBy()
+            Then("Optional.empty 상태를 반환한다.") {
+                cash shouldBe Optional.empty()
+            }
+        }
+    }
+
 })

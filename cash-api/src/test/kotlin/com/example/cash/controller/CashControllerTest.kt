@@ -48,19 +48,20 @@ class CashControllerUnitTest(
             }
         }
 
-        When("입금하기 정상 처리된 경우") {
+        val balance = 1000
+        When("지갑 잔액이 " +balance+ "원인 상태에서 입금하기 정상 처리된 경우") {
             val amount = 1000L
             val payload = CashDepositPayLoad(amount)
-            val expected = CashDepositView(amount)
+            val expected = CashDepositView(balance + amount)
             every { cashService.deposit(amount) } returns expected
             val exchange = cashDepositClient(payload)
                 .exchange()
             Then("status: 200 Ok") {
                 exchange.expectStatus().isOk
             }
-            Then("body: balance 는 1000원이다.") {
+            Then("body: balance 는 "+(balance + amount)+"원이 된다.") {
                 exchange.expectBody<CashDepositView>().returnResult()
-                    .responseBody!!.balance shouldBe amount
+                    .responseBody!!.balance shouldBe (balance + amount)
             }
         }
     }
