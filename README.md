@@ -1,3 +1,52 @@
+## 개요
+- 음료수 자판기라는 모델을 설계 하고 구축합니다.
+- 이 프로젝트는 다음의 목표를 갖습니다.
+  - 주어진 요구사항을 분석하여 기능별 도메인 설계 및 테스트코드를 작성합니다.
+  - docker를 활용한 베포를 합니다. 
+
+## 기술스택 & 아키텍처
+### main 기술 스택
+- Java
+- SpringBoot
+- spring data mongo
+- mongodb
+
+### 테스트 코드
+- kotlin
+- kotest
+- testcontainer
+
+### 베포
+- docker
+
+## 설계
+### 화면설계
+<img width="566" alt="image" src="https://user-images.githubusercontent.com/32861341/174527535-7d95516d-48a3-48dd-95e1-2c7d456baeea.png">
+참고 : https://github.com/ued123/modeling/issues/10
+
+### mongodb collections
+[https://app.diagrams.net/#G1RZ5ha8XBF10R33p4uVCIcujDG-qeBpUi](https://drive.google.com/file/d/1RZ5ha8XBF10R33p4uVCIcujDG-qeBpUi/view?usp=sharing)
+
+### rest api
+https://github.com/ued123/modeling/wiki/rest-api
+
+## 개발 방식
+### github flow
+![image](https://user-images.githubusercontent.com/32861341/199061253-dfd6937f-1edc-46c8-99c2-8859fdf9f941.png)
+
+
+<details>
+<summary>어플리케이션 시작방법</summary>
+
+> - docker/build.sh을 통한 drink_mongodb 컨테이너 이미지 생성
+> - docker/docker-compose.yml 파일 위치로 이동
+> - docker-compose 실행
+> - mongodb 초기화 데이터 생성시 IDEL에서 DrinkApplication 실행 옵션으로 active.profile = dev 로 바꾸어준다.
+</details>
+
+<details>
+<summary>자판기 제품 상세 요구사항</summary>
+
 ## 자판기 제품 요구사항
 ### 음료수를 뽑는다
 - 자판기는 금액 표시란에 입력된 금액(총액)을 보여준다.
@@ -24,25 +73,5 @@
 - 관리자는 음료수의 가격을 바꾸기 위해 변환 설정 버튼을 `음료수 가격 변환`으로 넣는다.
 - 관리자는 음료수의 종류와 새로운 가격을 입력한다.
 - 마지막으로 관리자느 시스템 모드 스위치를 `운영`으로 설정하고 자판기를 잠근다.
-
-## 설계
-### 프로토타입
-<img width="566" alt="image" src="https://user-images.githubusercontent.com/32861341/174527535-7d95516d-48a3-48dd-95e1-2c7d456baeea.png">
-참고 : https://github.com/ued123/modeling/issues/10
-
-
-### 테이블
-[https://app.diagrams.net/#G1RZ5ha8XBF10R33p4uVCIcujDG-qeBpUi](https://drive.google.com/file/d/1RZ5ha8XBF10R33p4uVCIcujDG-qeBpUi/view?usp=sharing)
-
-### rest api
-https://github.com/ued123/modeling/wiki/rest-api
-
-
-<details>
-<summary>어플리케이션 시작방법</summary>
-
-> - docker/build.sh을 통한 drink_mongodb 컨테이너 이미지 생성
-> - docker/docker-compose.yml 파일 위치로 이동
-> - docker-compose 실행
-> - mongodb 초기화 데이터 생성시 IDEL에서 DrinkApplication 실행 옵션으로 active.profile = dev 로 바꾸어준다.
 </details>
+
