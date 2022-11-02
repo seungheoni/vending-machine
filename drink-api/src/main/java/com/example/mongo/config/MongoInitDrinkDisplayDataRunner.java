@@ -16,7 +16,7 @@ import java.util.List;
 @Component
 @Profile("dev")
 @RequiredArgsConstructor
-public class MongoInitDataRunner implements ApplicationRunner {
+public class MongoInitDrinkDisplayDataRunner implements ApplicationRunner {
 
     private final DrinkRepository drinkRepository;
 
@@ -25,14 +25,14 @@ public class MongoInitDataRunner implements ApplicationRunner {
     @Override
     public void run(ApplicationArguments args) throws Exception {
 
-        System.out.println("개발모드 활성화...");
+        System.out.println("drink 도메인 개발모드 활성화...");
         clearData();
         initData();
     }
 
     public void initData() {
 
-        System.out.println("컬렉션 초기화 데이터 생성중... ");
+        System.out.println("drink display 컬렉션 초기화 데이터 생성중... ");
         List<Drink> drinks = List.of(
                 Drink.of("콜라", 2000, 30),
                 Drink.of("식헤", 3000, 30),
@@ -42,7 +42,7 @@ public class MongoInitDataRunner implements ApplicationRunner {
         drinkRepository.saveAll(drinks).forEach(drink -> generateDisplay(displays, drink));
         displayRepository.saveAll(displays);
 
-        System.out.println("컬렉션 초기화 데이터 생성 완료... ");
+        System.out.println("drink display 컬렉션 초기화 데이터 생성 완료... ");
     }
 
     public void generateDisplay(List<Display> displays, Drink drink) {
@@ -52,7 +52,7 @@ public class MongoInitDataRunner implements ApplicationRunner {
     }
 
     public void clearData() {
-        System.out.println("컬렉션 데이터 비우는 중... ");
+        System.out.println("drink display 컬렉션 데이터 비우는 중... ");
         drinkRepository.deleteAll();
         displayRepository.deleteAll();
     }
