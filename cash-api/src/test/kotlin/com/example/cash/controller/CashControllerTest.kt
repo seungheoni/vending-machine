@@ -13,6 +13,7 @@ import io.kotest.matchers.shouldBe
 import io.mockk.every
 import org.springframework.boot.test.autoconfigure.web.reactive.AutoConfigureWebTestClient
 import org.springframework.boot.test.context.SpringBootTest
+import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
 import org.springframework.test.web.reactive.server.WebTestClient
 import org.springframework.test.web.reactive.server.expectBody
@@ -44,6 +45,23 @@ class CashControllerUnitTest(
             Then("body: fields 가 기대값과 동일하다.") {
                 exchange.expectBody<ErrorBody>().returnResult().responseBody!!.should { errorBody ->
                     errorBody.fields shouldBe expected
+                }
+            }
+        }
+
+        When("정의하지 않은 에러가 발생 했을 경우 (오버플로우)") {
+            val amount = 9999999999999999
+            val payload = CashDepositPayLoad(amount)
+            val exchange = cashDepositClient(payload)
+                .exchange()
+            val expected = HttpStatus.INTERNAL_SERVER_ERROR.value()
+
+            Then("status: 500 Internal Server Error") {
+                exchange.expectStatus().is5xxServerError
+            }
+            Then("body: status는 server error") {
+                exchange.expectBody<ErrorBody>().returnResult().responseBody!!.should {errorBody ->
+                    errorBody.code shouldBe expected
                 }
             }
         }
