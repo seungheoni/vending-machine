@@ -54,15 +54,15 @@ class CashControllerUnitTest(
             val payload = CashDepositPayLoad(amount)
             val exchange = cashDepositClient(payload)
                 .exchange()
-            val expected = HttpStatus.INTERNAL_SERVER_ERROR.value()
+            val expected = HttpStatus.INTERNAL_SERVER_ERROR.reasonPhrase
+
+            every { cashService.deposit(amount) } throws Exception()
 
             Then("status: 500 Internal Server Error") {
                 exchange.expectStatus().is5xxServerError
             }
-            Then("body: status는 server error") {
-                exchange.expectBody<ErrorBody>().returnResult().responseBody!!.should {errorBody ->
-                    errorBody.code shouldBe expected
-                }
+            Then("body: message" + expected + "이다") {
+                exchange.expectBody<ErrorBody>().returnResult().responseBody!!.message shouldBe expected
             }
         }
 

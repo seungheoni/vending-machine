@@ -27,6 +27,6 @@ public class ExceptionTranslator {
     public ResponseEntity<ErrorBody> exception(Exception exception){
         return ResponseEntity
                 .status(HttpStatus.INTERNAL_SERVER_ERROR)
-                .body(ErrorBody.of(exception));
+                .body(ErrorBody.of());
     }
 }
