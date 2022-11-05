@@ -1,4 +1,4 @@
-package com.example.transaction.config
+package com.example.config
 
 import io.kotest.core.annotation.AutoScan
 import io.kotest.core.listeners.AfterProjectListener
