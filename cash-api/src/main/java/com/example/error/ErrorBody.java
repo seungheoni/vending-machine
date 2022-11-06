@@ -1,5 +1,6 @@
 package com.example.error;
 
+import com.example.error.exception.CashEmptyException;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
 import org.springframework.http.HttpStatus;
@@ -35,6 +36,13 @@ public class ErrorBody {
         ErrorBody body = new ErrorBody(ErrorMessage.INVALID_VALIDATION);
         body.fields = fields;
         return body;
+    }
+
+    /**
+     * 에러 바디 객체 생성 함수 (CashEmptyException)
+     */
+    public static ErrorBody of(CashEmptyException cashEmptyException) {
+        return new ErrorBody(ErrorMessage.CASH_EMPTY);
     }
 
     /**
