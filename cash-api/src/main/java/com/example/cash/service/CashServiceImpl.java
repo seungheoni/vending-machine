@@ -1,5 +1,6 @@
 package com.example.cash.service;
 
+import com.example.cash.dto.CashChangeView;
 import com.example.cash.dto.CashDepositView;
 import com.example.cash.repo.CashRepository;
 import com.example.mongo.model.Cash;
@@ -24,5 +25,10 @@ public class CashServiceImpl implements CashService {
                 }).map(cashRepository::save)
                 .map(Cash::toCashDepositView)
                 .orElseThrow();
+    }
+
+    @Override
+    public CashChangeView change() {
+        return null;
     }
 }
