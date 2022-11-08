@@ -40,13 +40,6 @@ public class ErrorBody {
     }
 
     /**
-     * 에러 바디 객체 생성 함수 (CashEmptyException)
-     */
-    public static ErrorBody of(CashEmptyException cashEmptyException) {
-        return new ErrorBody(ErrorMessage.CASH_EMPTY);
-    }
-
-    /**
      * 에러 바디 객체 생성 함수 (ResponseStatusException)
      */
     public static ErrorBody of(ResponseStatusException exception) {
