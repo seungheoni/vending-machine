@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.time.Instant;
 import java.util.List;
@@ -43,6 +44,13 @@ public class ErrorBody {
      */
     public static ErrorBody of(CashEmptyException cashEmptyException) {
         return new ErrorBody(ErrorMessage.CASH_EMPTY);
+    }
+
+    /**
+     * 에러 바디 객체 생성 함수 (ResponseStatusException)
+     */
+    public static ErrorBody of(ResponseStatusException exception) {
+        return new ErrorBody(exception.getReason());
     }
 
     /**
