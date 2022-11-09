@@ -1,9 +1,11 @@
 package com.example.error;
 
+import com.example.error.exception.CashEmptyException;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.time.Instant;
 import java.util.List;
@@ -35,6 +37,13 @@ public class ErrorBody {
         ErrorBody body = new ErrorBody(ErrorMessage.INVALID_VALIDATION);
         body.fields = fields;
         return body;
+    }
+
+    /**
+     * 에러 바디 객체 생성 함수 (ResponseStatusException)
+     */
+    public static ErrorBody of(ResponseStatusException exception) {
+        return new ErrorBody(exception.getReason());
     }
 
     /**

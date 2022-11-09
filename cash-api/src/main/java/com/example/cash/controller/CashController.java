@@ -1,5 +1,6 @@
 package com.example.cash.controller;
 
+import com.example.cash.dto.CashChangeView;
 import com.example.cash.dto.CashDepositPayLoad;
 import com.example.cash.dto.CashDepositView;
 import com.example.cash.service.CashService;
@@ -29,5 +30,15 @@ public class CashController {
     @PutMapping(value = "/deposit", consumes = MediaType.APPLICATION_JSON_VALUE,produces = MediaType.APPLICATION_JSON_VALUE)
     public CashDepositView cashDeposit(@Valid @RequestBody CashDepositPayLoad cashDepositPayLoad) {
         return cashService.deposit(cashDepositPayLoad.getAmount());
+    }
+
+    /**
+     * 거스름돈 반환
+     * @return
+     */
+    @Operation(summary = "거스름돈 반환")
+    @PutMapping(value = "/change", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public CashChangeView cashChange() {
+        return cashService.change();
     }
 }

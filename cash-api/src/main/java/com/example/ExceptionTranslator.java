@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.server.ResponseStatusException;
 
 @RestControllerAdvice
 public class ExceptionTranslator {
@@ -17,6 +18,18 @@ public class ExceptionTranslator {
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ErrorBody> methodArgumentNotValidException(MethodArgumentNotValidException exception) {
         return ResponseEntity.badRequest().body(ErrorBody.of(exception));
+    }
+
+    /**
+     * ResponseStatusException 및 구현힌 클래스인 경우,
+     * 예외 발생시 ResponseEntity 생성 로직
+     * @param exception @ModelAttribute 나 @RequestBody 유효성 검사 실패시 발생하는 예외
+     */
+    @ExceptionHandler(ResponseStatusException.class)
+    public ResponseEntity<ErrorBody> responseStatusException(ResponseStatusException exception){
+        return ResponseEntity
+                .status(exception.getStatus())
+                .body(ErrorBody.of(exception));
     }
 
     /**
