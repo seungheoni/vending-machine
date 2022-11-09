@@ -35,4 +35,22 @@ class TransactionServiceTest : BehaviorSpec({
             }
         }
     }
+
+    Given("거스름돈 반환 내역 생성") {
+        val amount = 1000L
+        val expected = transaction {
+            type = TransactionType.CHANGE
+            this.amount = amount
+        }
+        When(""+amount+"원에 대한 거스름돈 반환내역을 생성시") {
+            every {
+                transactionRepository.save(expected)
+            } returns expected
+            val result = transactionServiceImpl.change(amount)
+            Then("result.type = "+ expected.type + ", result.amount = "+expected.amount) {
+                result.type shouldBe expected.type
+                result.amount shouldBe expected.amount
+            }
+        }
+    }
 })
