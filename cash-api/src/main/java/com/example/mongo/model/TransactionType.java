@@ -9,5 +9,10 @@ public enum TransactionType {
     /**
      * 지출
      */
-    WITHDRAW
+    WITHDRAW,
+
+    /**
+     * 거스름돈
+     */
+    CHANGE
 }
