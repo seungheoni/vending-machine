@@ -1,6 +1,8 @@
 package com.example.mongo.model;
 
+import com.example.cash.dto.CashChangeView;
 import com.example.cash.dto.CashDepositView;
+import com.example.error.exception.CashEmptyException;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.bson.types.ObjectId;
@@ -8,6 +10,7 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.MongoId;
+import org.springframework.http.HttpStatus;
 
 import java.time.Instant;
 
@@ -47,6 +50,10 @@ public class Cash {
         return new Cash(id, balance, createDate, updateDate);
     }
 
+    public Cash reset() {
+        return new Cash(id, 0L, createDate, Instant.now());
+    }
+
     /**
      * 입금하기
      *
@@ -59,9 +66,27 @@ public class Cash {
     }
 
     /**
+     * 거스름돈 반환
+     * @return
+     */
+    public long changeReturn() {
+        if(balance == 0) {
+            throw new CashEmptyException(HttpStatus.NOT_FOUND);
+        }
+        return balance;
+    }
+
+    /**
      * 입금 응답값 변환
      */
     public CashDepositView toCashDepositView() {
         return new CashDepositView(balance);
+    }
+
+    /**
+     * 거스름돈 응답값 변환
+     */
+    public CashChangeView toCashChangeView() {
+        return new CashChangeView(balance);
     }
 }
