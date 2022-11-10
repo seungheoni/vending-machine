@@ -63,4 +63,13 @@ public class Transaction {
     public static Transaction ofDeposit(Long amount) {
         return of(TransactionType.DEPOSIT, amount);
     }
+
+    /**
+     * 거스름돈 반환 내역 생성
+     *
+     * @param amount 거스름돈 반환 금액
+     */
+    public static Transaction ofChange(Long amount) {
+        return of(TransactionType.CHANGE, amount);
+    }
 }

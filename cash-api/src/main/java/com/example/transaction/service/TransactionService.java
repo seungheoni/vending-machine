@@ -6,4 +6,6 @@ public interface TransactionService {
 
     Transaction deposit(Long amount);
 
+    Transaction change(Long amount);
+
 }

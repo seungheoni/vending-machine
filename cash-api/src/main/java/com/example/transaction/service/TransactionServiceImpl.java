@@ -16,4 +16,8 @@ public class TransactionServiceImpl implements TransactionService {
         return transactionRepository.save(Transaction.ofDeposit(amount));
     }
 
+    @Override
+    public Transaction change(Long amount) {
+        return transactionRepository.save(Transaction.ofChange(amount));
+    }
 }
