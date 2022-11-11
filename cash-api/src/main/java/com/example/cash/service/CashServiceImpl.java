@@ -3,6 +3,7 @@ package com.example.cash.service;
 import com.example.cash.dto.CashChangeView;
 import com.example.cash.dto.CashDepositView;
 import com.example.cash.repo.CashRepository;
+import com.example.error.exception.CashEmptyException;
 import com.example.mongo.model.Cash;
 import com.example.transaction.service.TransactionService;
 import lombok.RequiredArgsConstructor;
@@ -30,13 +31,13 @@ public class CashServiceImpl implements CashService {
     @Override
     public CashChangeView change() {
         return cashRepository.findFirstBy()
+                .filter(Cash::enableBalance)
                 .map(cash -> {
-                    long change = cash.change();
-                    cashRepository.save(cash);
-                    return change;
-                }).map(change -> {
-                    transactionService.change(change);
-                    return new CashChangeView(change);
-                }).orElseThrow();
+                    cashRepository.save(cash.change());
+                    transactionService.change(cash.getBalance());
+                    return cash.toCashChangeView();
+                }).orElseThrow(() -> {
+                    throw new CashEmptyException();
+                });
     }
 }
