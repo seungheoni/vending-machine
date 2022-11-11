@@ -1,6 +1,8 @@
 package com.example.cash.service
 
+import com.example.cash.dto.CashChangeView
 import com.example.cash.repo.CashRepository
+import com.example.error.exception.CashEmptyException
 import com.example.mongo.model.Cash
 import com.example.mongo.model.Transaction
 import com.example.transaction.service.TransactionServiceImpl
@@ -10,8 +12,8 @@ import io.kotest.matchers.shouldBe
 import io.mockk.clearAllMocks
 import io.mockk.every
 import io.mockk.mockk
+import org.springframework.http.HttpStatus
 import java.util.*
-import kotlin.NoSuchElementException
 
 class CashServiceTest : BehaviorSpec({
 
@@ -73,4 +75,48 @@ class CashServiceTest : BehaviorSpec({
         }
     }
 
+    Given("cashService change 테스트") {
+        When("잔액이 0원 일떄 거스름돈을 반환하면") {
+            val cash = Cash.of(0);
+
+            every {
+                cashRepository.findFirstBy()
+            } returns Optional.of(cash)
+
+            every {
+                transactionServiceImpl.change(any())
+            } throws CashEmptyException(HttpStatus.NOT_FOUND)
+
+            val exception = shouldThrowExactly<CashEmptyException> {
+                cashService.change()
+            }
+
+            Then("message: 잔액이 없습니다") {
+                exception.reason shouldBe "잔액이 없습니다."
+            }
+        }
+
+        val balance = 1000L
+        When("잔액이 "+balance+"원 일떄 거스름돈을 반환하면") {
+            val cash = Cash.of(balance);
+            val expected = CashChangeView(balance);
+
+            every {
+                cashRepository.findFirstBy()
+            } returns Optional.of(cash)
+
+            every {
+                transactionServiceImpl.change(balance)
+            } returns Transaction.ofChange(balance)
+
+            every {
+                cashRepository.save(cash)
+            } returns cash
+
+            val cashChangeView = cashService.change();
+            Then(""+expected.amount + "원의 잔액 결과를 반환한다.") {
+                cashChangeView.amount shouldBe expected.amount
+            }
+        }
+    }
 })
