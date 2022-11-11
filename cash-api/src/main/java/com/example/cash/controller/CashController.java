@@ -34,10 +34,10 @@ public class CashController {
 
     /**
      * 거스름돈 반환
-     * @return
+     * @return CashChangeView
      */
     @Operation(summary = "거스름돈 반환")
-    @PutMapping(value = "/change", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(value = "/change", produces = MediaType.APPLICATION_JSON_VALUE)
     public CashChangeView cashChange() {
         return cashService.change();
     }
