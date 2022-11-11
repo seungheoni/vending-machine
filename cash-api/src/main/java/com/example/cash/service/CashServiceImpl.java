@@ -29,6 +29,14 @@ public class CashServiceImpl implements CashService {
 
     @Override
     public CashChangeView change() {
-        return null;
+        return cashRepository.findFirstBy()
+                .map(cash -> {
+                    long change = cash.change();
+                    cashRepository.save(cash);
+                    return change;
+                }).map(change -> {
+                    transactionService.change(change);
+                    return new CashChangeView(change);
+                }).orElseThrow();
     }
 }
