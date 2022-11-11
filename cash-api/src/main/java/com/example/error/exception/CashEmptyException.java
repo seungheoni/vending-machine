@@ -6,7 +6,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 public class CashEmptyException extends ResponseStatusException {
 
-    public CashEmptyException(HttpStatus status) {
-        super(status, ErrorMessage.CASH_EMPTY);
+    public CashEmptyException() {
+        super(HttpStatus.NOT_FOUND, ErrorMessage.CASH_EMPTY);
     }
 }
