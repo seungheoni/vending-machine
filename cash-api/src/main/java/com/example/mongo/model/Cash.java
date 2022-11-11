@@ -1,6 +1,7 @@
 package com.example.mongo.model;
 
 import com.example.cash.dto.CashDepositView;
+import com.example.error.exception.CashEmptyException;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.bson.types.ObjectId;
@@ -8,6 +9,7 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.MongoId;
+import org.springframework.http.HttpStatus;
 
 import java.time.Instant;
 
@@ -56,6 +58,20 @@ public class Cash {
         Cash cash = copy();
         cash.balance += amount;
         return cash;
+    }
+
+    /**
+     * 남은 거스름돈 반환
+     *
+     * @return long
+     */
+    public long change() {
+        if(balance == 0) {
+            throw new CashEmptyException(HttpStatus.NOT_FOUND);
+        }
+        long amount = balance;
+        balance = 0L;
+        return amount;
     }
 
     /**
