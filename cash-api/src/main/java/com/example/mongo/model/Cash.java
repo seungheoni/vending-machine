@@ -1,7 +1,7 @@
 package com.example.mongo.model;
 
+import com.example.cash.dto.CashChangeView;
 import com.example.cash.dto.CashDepositView;
-import com.example.error.exception.CashEmptyException;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.bson.types.ObjectId;
@@ -9,7 +9,6 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.MongoId;
-import org.springframework.http.HttpStatus;
 
 import java.time.Instant;
 
@@ -42,7 +41,7 @@ public class Cash {
     private Instant updateDate;
 
     public static Cash of(long balance) {
-        return new Cash(ObjectId.get(), balance, Instant.now(), Instant.now());
+        return new Cash(null, balance, null, null);
     }
 
     private Cash copy() {
@@ -63,15 +62,18 @@ public class Cash {
     /**
      * 남은 거스름돈 반환
      *
-     * @return long
      */
-    public long change() {
-        if(balance == 0) {
-            throw new CashEmptyException(HttpStatus.NOT_FOUND);
-        }
-        long amount = balance;
-        balance = 0L;
-        return amount;
+    public Cash change() {
+        Cash cash = copy();
+        cash.balance = 0L;
+        return cash;
+    }
+
+    /**
+     * 잔고 사용여부
+     */
+    public boolean enableBalance() {
+        return balance > 0;
     }
 
     /**
@@ -79,5 +81,12 @@ public class Cash {
      */
     public CashDepositView toCashDepositView() {
         return new CashDepositView(balance);
+    }
+
+    /**
+     * 거스름돈 응답값 반환
+     */
+    public CashChangeView toCashChangeView() {
+        return new CashChangeView(balance);
     }
 }

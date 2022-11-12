@@ -12,7 +12,6 @@ import io.kotest.matchers.shouldBe
 import io.mockk.clearAllMocks
 import io.mockk.every
 import io.mockk.mockk
-import org.springframework.http.HttpStatus
 import java.util.*
 
 class CashServiceTest : BehaviorSpec({
@@ -77,7 +76,7 @@ class CashServiceTest : BehaviorSpec({
 
     Given("cashService change 테스트") {
         When("잔액이 0원 일떄 거스름돈을 반환하면") {
-            val cash = Cash.of(0);
+            val cash = Cash.of(0)
 
             every {
                 cashRepository.findFirstBy()
@@ -85,7 +84,7 @@ class CashServiceTest : BehaviorSpec({
 
             every {
                 transactionServiceImpl.change(any())
-            } throws CashEmptyException(HttpStatus.NOT_FOUND)
+            } throws CashEmptyException()
 
             val exception = shouldThrowExactly<CashEmptyException> {
                 cashService.change()
@@ -98,8 +97,9 @@ class CashServiceTest : BehaviorSpec({
 
         val balance = 1000L
         When("잔액이 "+balance+"원 일떄 거스름돈을 반환하면") {
-            val cash = Cash.of(balance);
-            val expected = CashChangeView(balance);
+            val cash = Cash.of(balance)
+            val changeCash = cash.change()
+            val expected = CashChangeView(balance)
 
             every {
                 cashRepository.findFirstBy()
@@ -110,10 +110,10 @@ class CashServiceTest : BehaviorSpec({
             } returns Transaction.ofChange(balance)
 
             every {
-                cashRepository.save(cash)
-            } returns cash
+                cashRepository.save(changeCash)
+            } returns changeCash
 
-            val cashChangeView = cashService.change();
+            val cashChangeView = cashService.change()
             Then(""+expected.amount + "원의 잔액 결과를 반환한다.") {
                 cashChangeView.amount shouldBe expected.amount
             }
