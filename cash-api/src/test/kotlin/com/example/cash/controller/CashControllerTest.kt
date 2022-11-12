@@ -106,7 +106,7 @@ class CashControllerUnitTest(
         }
 
         When("자판기 잔액이 0원인 상태에서 호출 했을때") {
-            every { cashService.change() } throws CashEmptyException(HttpStatus.NOT_FOUND)
+            every { cashService.change() } throws CashEmptyException()
             val exchange = cashChangeClient().exchange()
             val expected = ErrorMessage.CASH_EMPTY
             Then("status: 404 NOT FOUND") {

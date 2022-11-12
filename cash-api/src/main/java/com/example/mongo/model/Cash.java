@@ -1,5 +1,6 @@
 package com.example.mongo.model;
 
+import com.example.cash.dto.CashChangeView;
 import com.example.cash.dto.CashDepositView;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -40,7 +41,7 @@ public class Cash {
     private Instant updateDate;
 
     public static Cash of(long balance) {
-        return new Cash(ObjectId.get(), balance, Instant.now(), Instant.now());
+        return new Cash(null, balance, null, null);
     }
 
     private Cash copy() {
@@ -59,9 +60,33 @@ public class Cash {
     }
 
     /**
+     * 남은 거스름돈 반환
+     *
+     */
+    public Cash change() {
+        Cash cash = copy();
+        cash.balance = 0L;
+        return cash;
+    }
+
+    /**
+     * 잔고 사용여부
+     */
+    public boolean enableBalance() {
+        return balance > 0;
+    }
+
+    /**
      * 입금 응답값 변환
      */
     public CashDepositView toCashDepositView() {
         return new CashDepositView(balance);
+    }
+
+    /**
+     * 거스름돈 응답값 반환
+     */
+    public CashChangeView toCashChangeView() {
+        return new CashChangeView(balance);
     }
 }
