@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @RestController
@@ -28,9 +29,8 @@ public class DisplayController {
     @Operation(summary = "상품 진열")
     @GetMapping(path = "/display", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<DisplayDrinkView> drinkDisplay() {
-
         List<Display> result = displayService.getDisplayDrinks();
-        return result.stream().map(Display::toDisplayDrinkResult).collect(Collectors.toList());
+        return result.stream().map(Display::toDisplayDrinkResult).filter(Objects::nonNull).collect(Collectors.toList());
     }
 
 }
