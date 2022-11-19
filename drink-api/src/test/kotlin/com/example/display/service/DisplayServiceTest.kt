@@ -7,12 +7,11 @@ import io.kotest.matchers.types.shouldBeSameInstanceAs
 import io.mockk.clearAllMocks
 import io.mockk.every
 import io.mockk.mockk
-import org.bson.types.ObjectId
 
 class DisplayServiceTest: BehaviorSpec ({
 
     val displayRepository : DisplayRepository = mockk()
-    val displayServiceImpl : DisplayServiceImpl = DisplayServiceImpl(displayRepository)
+    val displayServiceImpl = DisplayServiceImpl(displayRepository)
 
     beforeEach {
         clearAllMocks()
@@ -20,7 +19,7 @@ class DisplayServiceTest: BehaviorSpec ({
 
     Given("display와 drink의 룩업된 전체 리스트 조회 서비스") {
         When("displayServiceImpl의 displayDrinks 조회시") {
-            val expected = listOf(Display.of(1,ObjectId.get()))
+            val expected = listOf(Display.of(1, "code"))
             every {
                 displayRepository.findWithDrink()
             } returns expected

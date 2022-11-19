@@ -10,9 +10,9 @@ import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest
 class DrinkRepositoryTest(
     private val drinkRepository: DrinkRepository
 ):BehaviorSpec({
-
+    val code = "code"
     Given("drink repository 저장 테스트") {
-        val drink = Drink.of("콜라",1000,10)
+        val drink = Drink.of(code,"콜라",1000,10)
         When("콜라(drink) 상품 저장하면") {
             val result = drinkRepository.save(drink)
             Then("저장 성공시 콜라(drink)를 반환한다.") {
@@ -22,18 +22,18 @@ class DrinkRepositoryTest(
     }
 
     Given("drink repository 삭제 테스트") {
-        val drink = Drink.of("콜라", 1000, 10)
+        val drink = Drink.of(code,"콜라", 1000, 10)
             .let(drinkRepository::save)
         When("콜라(drink) 상품 삭제하면") {
             val result = drinkRepository.delete(drink)
             Then("성공시 void를 반환한다.") {
-                result shouldBe kotlin.Unit
+                result shouldBe Unit
             }
         }
     }
 
     Given("drink repository 조회 테스트") {
-        val drink = Drink.of("콜라", 1000, 10)
+        val drink = Drink.of(code,"콜라", 1000, 10)
             .let(drinkRepository::save)
         When("콜라(drink) 상품 조회하면") {
             val result = drinkRepository.findById(drink.id)
