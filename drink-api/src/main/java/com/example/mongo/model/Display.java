@@ -50,6 +50,6 @@ public class Display {
     public DisplayDrinkView toDisplayDrinkResult() {
         Drink drink = drinks.stream().findFirst().orElseThrow();
         Status status = (drink.quantity == 0) ? Status.SOLDOUT : Status.AVAILABLE;
-        return new DisplayDrinkView(id, position, status, drink.name, drink.price);
+        return new DisplayDrinkView(drink.code, position, status, drink.name, drink.price);
     }
 }
