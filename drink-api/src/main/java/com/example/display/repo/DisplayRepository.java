@@ -15,8 +15,8 @@ public interface DisplayRepository extends MongoRepository<Display, ObjectId> {
             "{ $lookup:\n" +
             "       {\n" +
             "         from: drink,\n" +
-            "         localField: drinkId,\n" +
-            "         foreignField: _id,\n" +
+            "         localField: drinkCode,\n" +
+            "         foreignField: code,\n" +
             "         as: drinks\n" +
             "       }" +
             "}"})
