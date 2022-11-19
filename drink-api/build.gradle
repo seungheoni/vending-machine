@@ -9,3 +9,7 @@ version = 'v01'
 
 dependencies {
 }
+
+test {
+    useJUnitPlatform()
+}
