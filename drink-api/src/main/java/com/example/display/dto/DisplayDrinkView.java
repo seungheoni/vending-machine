@@ -25,7 +25,7 @@ public class DisplayDrinkView {
     /**
      * 상품 상태
      */
-    private Status status;
+    private Status status = Status.SOLDOUT;
 
     /**
      * 상품 명
