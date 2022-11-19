@@ -23,7 +23,7 @@ public class MongoInitDrinkDisplayDataRunner implements ApplicationRunner {
     private final DisplayRepository displayRepository;
 
     @Override
-    public void run(ApplicationArguments args) throws Exception {
+    public void run(ApplicationArguments args) {
 
         System.out.println("drink 도메인 개발모드 활성화...");
         clearData();
@@ -34,9 +34,9 @@ public class MongoInitDrinkDisplayDataRunner implements ApplicationRunner {
 
         System.out.println("drink display 컬렉션 초기화 데이터 생성중... ");
         List<Drink> drinks = List.of(
-                Drink.of("콜라", 2000, 30),
-                Drink.of("식헤", 3000, 30),
-                Drink.of("사이다", 1500, 0));
+                Drink.of("coca-cola-500ml", "코카콜라 500ml", 2000, 30),
+                Drink.of("sik-hye-500ml", "식혜 500ml", 3000, 30),
+                Drink.of("soda-pop-500ml", "사이다 500ml", 1500, 0));
 
         List<Display> displays = new ArrayList<>();
         drinkRepository.saveAll(drinks).forEach(drink -> generateDisplay(displays, drink));
@@ -48,7 +48,7 @@ public class MongoInitDrinkDisplayDataRunner implements ApplicationRunner {
     public void generateDisplay(List<Display> displays, Drink drink) {
         int position = displays.size() + 1;
         if (position > 9) return;
-        displays.add(Display.of(position, drink.getId()));
+        displays.add(Display.of(position, drink.getCode()));
     }
 
     public void clearData() {
