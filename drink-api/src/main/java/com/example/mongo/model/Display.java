@@ -5,6 +5,7 @@ import com.example.drink.enums.Status;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.bson.types.ObjectId;
+import org.springframework.data.annotation.ReadOnlyProperty;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.MongoId;
 
@@ -29,17 +30,18 @@ public class Display {
     int position;
 
     /**
-     * 음료 고유 번호
+     * 음료수 물류 관리 번호
      */
-    ObjectId drinkId;
+    String drinkCode;
 
     /**
-     * 음료
+     * 전시 등록된 음료수 리스트
      */
+    @ReadOnlyProperty
     List<Drink> drinks;
     
-    public static Display of(int position, ObjectId drinkId) {
-        return new Display(null, position, drinkId, null);
+    public static Display of(int position, String drinkCode) {
+        return new Display(null, position, drinkCode, null);
     }
 
     /**
