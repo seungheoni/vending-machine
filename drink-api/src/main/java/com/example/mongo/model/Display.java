@@ -39,7 +39,7 @@ public class Display {
      */
     @ReadOnlyProperty
     List<Drink> drinks;
-    
+
     public static Display of(int position, String drinkCode) {
         return new Display(null, position, drinkCode, null);
     }
@@ -48,7 +48,15 @@ public class Display {
      * 전시 음료결과 데이터 변환
      */
     public DisplayDrinkView toDisplayDrinkResult() {
-        Drink drink = drinks.stream().findFirst().orElseThrow();
+        return drinks.stream().findFirst().map(this::toDisplayDrinkView).orElse(null);
+    }
+
+    /**
+     * DisplayDrinkView 변환 함수
+     *
+     * @param drink 음료수
+     */
+    private DisplayDrinkView toDisplayDrinkView(Drink drink) {
         Status status = (drink.quantity == 0) ? Status.SOLDOUT : Status.AVAILABLE;
         return new DisplayDrinkView(drink.code, position, status, drink.name, drink.price);
     }
