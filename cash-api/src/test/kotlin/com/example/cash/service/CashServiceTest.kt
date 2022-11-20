@@ -126,11 +126,11 @@ class CashServiceTest : BehaviorSpec({
         val amount = 1000L
         val balance = 1000L
         When("입금 금액이 부족한 경우") {
-            val cash = Cash.of(0)
+            val cash = Cash.of(1)
 
             every {
                 cashRepository.findFirstBy()
-            } returns Optional.ofNullable(cash)
+            } returns Optional.of(cash)
 
             val exception = shouldThrowExactly<CashNotEnoughException> {
                 cashService.charge(amount)

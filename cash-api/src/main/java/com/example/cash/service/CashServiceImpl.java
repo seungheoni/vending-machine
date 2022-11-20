@@ -21,8 +21,7 @@ public class CashServiceImpl implements CashService {
     @Override
     public CashDepositView deposit(final Long amount) {
         return cashRepository.findFirstBy()
-                .map(cash ->
-                    cashRepository.save(cash.deposit(amount))
+                .map(cash -> cashRepository.save(cash.deposit(amount))
                 ).map(cash -> {
                     transactionService.deposit(amount);
                     return cash.toCashDepositView();
@@ -45,9 +44,10 @@ public class CashServiceImpl implements CashService {
     @Override
     public void charge(Long amount) {
         cashRepository.findFirstBy()
-                .filter(Cash::enableBalance)
+                .map(cash -> cash.charge(amount))
+                .filter(cash -> cash.getBalance() >= 0)
                 .ifPresentOrElse(cash -> {
-                    cashRepository.save(cash.charge(amount));
+                    cashRepository.save(cash);
                     transactionService.charge(amount);
                 }, () -> {
                     throw new CashNotEnoughException();
