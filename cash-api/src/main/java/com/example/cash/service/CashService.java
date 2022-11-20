@@ -7,14 +7,18 @@ public interface CashService {
 
     /**
      * 금액 입금
-     * @param amount
-     * @return
+     * @param amount 금액
      */
     CashDepositView deposit(Long amount);
 
     /**
      * 거스름돈 반환
-     * @return
      */
     CashChangeView change();
+
+    /**
+     * 입금 금액 사용
+     * @param amount 사용 금액
+     */
+    void charge(Long amount);
 }
