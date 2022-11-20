@@ -2,7 +2,9 @@ package com.example.cash.service
 
 import com.example.cash.dto.CashChangeView
 import com.example.cash.repo.CashRepository
+import com.example.error.ErrorMessage
 import com.example.error.exception.CashEmptyException
+import com.example.error.exception.CashNotEnoughException
 import com.example.mongo.model.Cash
 import com.example.mongo.model.Transaction
 import com.example.transaction.service.TransactionServiceImpl
@@ -116,6 +118,48 @@ class CashServiceTest : BehaviorSpec({
             val cashChangeView = cashService.change()
             Then(""+expected.amount + "원의 잔액 결과를 반환한다.") {
                 cashChangeView.amount shouldBe expected.amount
+            }
+        }
+    }
+
+    Given("cashService charge 테스트") {
+        val amount = 1000L
+        val balance = 1000L
+        When("입금 금액이 부족한 경우") {
+            val cash = Cash.of(0)
+
+            every {
+                cashRepository.findFirstBy()
+            } returns Optional.ofNullable(cash)
+
+            val exception = shouldThrowExactly<CashNotEnoughException> {
+                cashService.charge(amount)
+            }
+
+            Then("message: 금액이 부족합니다") {
+                exception.reason shouldBe ErrorMessage.CASH_NOT_ENOUGH
+            }
+        }
+
+        When("잔액이 " + balance + "원인 경우" + amount + "원을 사용할떄") {
+            val cash = Cash.of(balance)
+            val chargeCash = cash.charge(amount)
+
+            every {
+                cashRepository.findFirstBy()
+            } returns Optional.of(cash)
+
+            every {
+                transactionServiceImpl.charge(balance)
+            } returns Transaction.ofCharge(balance)
+
+            every {
+                cashRepository.save(chargeCash)
+            } returns chargeCash
+
+            val result = cashService.charge(amount)
+            Then("return 값이 존재하지 않는다") {
+                result shouldBe Unit
             }
         }
     }
