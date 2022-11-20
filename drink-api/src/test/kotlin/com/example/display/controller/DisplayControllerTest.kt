@@ -3,8 +3,6 @@ package com.example.display.controller
 import com.example.display.dto.DisplayDrinkView
 import com.example.display.fixture.display
 import com.example.display.service.DisplayService
-import com.example.drink.enums.Status
-import com.example.mongo.model.Display
 import com.example.mongo.model.Drink
 import com.ninjasquad.springmockk.MockkBean
 import io.kotest.core.spec.style.BehaviorSpec
@@ -15,7 +13,6 @@ import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.http.MediaType
 import org.springframework.test.web.reactive.server.WebTestClient
 import org.springframework.test.web.reactive.server.expectBody
-import reactor.core.publisher.Mono
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureWebTestClient
@@ -30,8 +27,8 @@ class DisplayControllerTest(
                 every { displayService.displayDrinks } returns listOf((display {
                     id = ObjectId.get()
                     position = 1
-                    drinkId = ObjectId.get()
-                    drinks = listOf<Drink>(Drink.of("콜라", 1000,5))
+                    drinkCode = "coke"
+                    drinks = listOf<Drink>(Drink.of("coke", "콜라", 1000,5))
                 }))
 
                 webTestClient

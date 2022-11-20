@@ -5,10 +5,12 @@ import com.example.drink.enums.Status;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.bson.types.ObjectId;
+import org.springframework.data.annotation.ReadOnlyProperty;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.MongoId;
 
 import java.util.List;
+import java.util.Objects;
 
 /**
  * 음료 전시 데이터
@@ -29,25 +31,34 @@ public class Display {
     int position;
 
     /**
-     * 음료 고유 번호
+     * 음료수 물류 관리 번호
      */
-    ObjectId drinkId;
+    String drinkCode;
 
     /**
-     * 음료
+     * 전시 등록된 음료수 리스트
      */
+    @ReadOnlyProperty
     List<Drink> drinks;
-    
-    public static Display of(int position, ObjectId drinkId) {
-        return new Display(null, position, drinkId, null);
+
+    public static Display of(int position, String drinkCode) {
+        return new Display(null, position, drinkCode, null);
     }
 
     /**
      * 전시 음료결과 데이터 변환
      */
     public DisplayDrinkView toDisplayDrinkResult() {
-        Drink drink = drinks.stream().findFirst().orElseThrow();
+        return drinks.stream().filter(Objects::nonNull).findFirst().map(this::toDisplayDrinkView).orElse(null);
+    }
+
+    /**
+     * DisplayDrinkView 변환 함수
+     *
+     * @param drink 음료수
+     */
+    private DisplayDrinkView toDisplayDrinkView(Drink drink) {
         Status status = (drink.quantity == 0) ? Status.SOLDOUT : Status.AVAILABLE;
-        return new DisplayDrinkView(id, position, status, drink.name, drink.price);
+        return new DisplayDrinkView(drink.code, position, status, drink.name, drink.price);
     }
 }

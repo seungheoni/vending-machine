@@ -12,10 +12,10 @@ class DisplayBuilder {
 
     var id: ObjectId? = null
     var position: Int = 0
-    var drinkId: ObjectId? = null
+    var drinkCode: String? = null
     var drinks: List<Drink>? = null
 
     fun build(): Display = Display(
-        id,position,drinkId,drinks
+        id,position,drinkCode,drinks
     )
 }
