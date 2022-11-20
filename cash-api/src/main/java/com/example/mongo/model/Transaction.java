@@ -72,4 +72,13 @@ public class Transaction {
     public static Transaction ofChange(Long amount) {
         return of(TransactionType.CHANGE, amount);
     }
+
+    /**
+     * 입금 금액 사용
+     *
+     * @param amount 사용한 금액
+     */
+    public static Transaction ofCharge(Long amount) {
+        return of(TransactionType.CHARGE, amount);
+    }
 }
