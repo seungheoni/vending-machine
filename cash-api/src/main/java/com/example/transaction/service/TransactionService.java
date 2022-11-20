@@ -8,4 +8,5 @@ public interface TransactionService {
 
     Transaction change(Long amount);
 
+    Transaction charge(Long amount);
 }
