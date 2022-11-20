@@ -20,4 +20,8 @@ public class TransactionServiceImpl implements TransactionService {
     public Transaction change(Long amount) {
         return transactionRepository.save(Transaction.ofChange(amount));
     }
+
+    @Override
+    public Transaction charge(Long amount) {return transactionRepository.save(Transaction.ofCharge(amount));}
+
 }
