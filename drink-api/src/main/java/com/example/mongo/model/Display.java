@@ -10,6 +10,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.MongoId;
 
 import java.util.List;
+import java.util.Objects;
 
 /**
  * 음료 전시 데이터
@@ -48,7 +49,7 @@ public class Display {
      * 전시 음료결과 데이터 변환
      */
     public DisplayDrinkView toDisplayDrinkResult() {
-        return drinks.stream().findFirst().map(this::toDisplayDrinkView).orElse(null);
+        return drinks.stream().filter(Objects::nonNull).findFirst().map(this::toDisplayDrinkView).orElse(null);
     }
 
     /**
