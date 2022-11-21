@@ -2,4 +2,4 @@ rootProject.name = 'vending-machine'
 include 'drink-api'
 include 'application'
 include 'cash-api'
-
+include 'purchase-api'
