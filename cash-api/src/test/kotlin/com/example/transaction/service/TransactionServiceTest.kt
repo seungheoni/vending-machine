@@ -53,4 +53,22 @@ class TransactionServiceTest : BehaviorSpec({
             }
         }
     }
+
+    Given("금액 사용 내역 생성") {
+        val amount = 1000L
+        val expected = transaction {
+            type = TransactionType.CHARGE
+            this.amount = amount
+        }
+        When(""+amount+"원에 금액 사용 내역을 생성시") {
+            every {
+                transactionRepository.save(expected)
+            } returns expected
+            val result = transactionServiceImpl.charge(amount)
+            Then("result.type = "+ expected.type + ", result.amount = "+expected.amount) {
+                result.type shouldBe expected.type
+                result.amount shouldBe expected.amount
+            }
+        }
+    }
 })

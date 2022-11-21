@@ -70,6 +70,15 @@ public class Cash {
     }
 
     /**
+     * 입금 금액 사용
+     * @param amount 금액
+     */
+    public Cash charge(Long amount) {
+        Cash cash = copy();
+        cash.balance -= amount;
+        return cash;
+    }
+    /**
      * 잔고 사용여부
      */
     public boolean enableBalance() {
