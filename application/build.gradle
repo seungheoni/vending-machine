@@ -14,6 +14,7 @@ dependencies {
 
     implementation project(':drink-api');
     implementation project(':cash-api');
+    implementation project(':purchase-api');
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 
 }
