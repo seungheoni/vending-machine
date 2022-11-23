@@ -3,12 +3,9 @@ package com.example.purchase.controller;
 import com.example.purchase.dto.PurchaseDrinkPayLoad;
 import com.example.purchase.service.PurchaseService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -25,7 +22,8 @@ public class PurchaseController {
      * @return ResponseEntity<String>
      */
     @PostMapping(value = "/drink",consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> purchaseDrink(@Valid @RequestBody PurchaseDrinkPayLoad purchaseDrinkPayLoad) {
-        return purchaseService.purchaseDrink(purchaseDrinkPayLoad);
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void purchaseDrink(@Valid @RequestBody PurchaseDrinkPayLoad purchaseDrinkPayLoad) {
+        purchaseService.purchaseDrink(purchaseDrinkPayLoad);
     }
 }
