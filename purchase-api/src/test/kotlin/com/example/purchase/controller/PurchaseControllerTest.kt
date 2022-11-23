@@ -52,9 +52,8 @@ class PurchaseControllerTest(
         When("음료수 구매 코드 전달 정상 처리시") {
 
             val payload = PurchaseDrinkPayLoad("coca-cola-500ml")
-            val expected = ResponseEntity.noContent().build<String>();
 
-            every { purchaseService.purchaseDrink(payload) } returns expected
+            every { purchaseService.purchaseDrink(payload) } returns 0
             val exchange = purchaseDrinkClient(payload).exchange()
 
             Then("status 204 NoContent") {
