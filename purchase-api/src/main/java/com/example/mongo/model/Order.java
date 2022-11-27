@@ -29,21 +29,21 @@ public class Order {
      * ex) 0020101,0020102
      */
     @Indexed(unique = true)
-    private String purchaseOrder;
+    private String code;
+
+    /**
+     * 구매 항목
+     */
+    private String item;
+
+    /**
+     * 제품 가격
+     */
+    private long price;
 
     /**
      * 주문서 생성 날짜
      */
     @CreatedDate
     private Instant createDate;
-
-    /**
-     * 음료수 제품에 대한 description
-     */
-    private String description;
-
-    /**
-     * 제품 가격
-     */
-    private long price;
 }
