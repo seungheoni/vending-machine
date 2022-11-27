@@ -9,12 +9,12 @@ inline fun order(block: OrderBuilder.() -> Unit = {}) =
 
 class OrderBuilder {
     var id: ObjectId? = null
-    var purchaseOrder : String? = null
+    var code : String? = null
     var createDate : Instant? = null
-    var description : String? = null
+    var item : String? = null
     var price : Long = 0
 
     fun build(): Order = Order(
-        id,purchaseOrder, createDate, description, price
+        id,code,item,price,createDate
     )
 }
