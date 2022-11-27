@@ -16,8 +16,8 @@ class OrderRepositoryTest(
         val drinkName = "콜라"
         val price = 2000L
         val order = order {
-            this.purchaseOrder = purchaseOrder
-            this.description = drinkName
+            this.code = purchaseOrder
+            this.item = drinkName
             this.price = price
         }
 
@@ -28,7 +28,7 @@ class OrderRepositoryTest(
             val expected = orderRepository.save(order);
 
             Then("생성한 주문서 코드는 " + purchaseOrder +"") {
-                expected.purchaseOrder shouldBe purchaseOrder
+                expected.code shouldBe purchaseOrder
             }
         }
 
