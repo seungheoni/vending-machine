@@ -1,5 +1,6 @@
 package com.example.mongo.model;
 
+import com.example.order.dto.OrderView;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.bson.types.ObjectId;
@@ -46,4 +47,8 @@ public class Order {
      */
     @CreatedDate
     private Instant createDate;
+
+    public OrderView toOrderView() {
+        return new OrderView(id,code,item,price,createDate);
+    }
 }
