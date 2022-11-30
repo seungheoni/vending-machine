@@ -1,11 +1,10 @@
 package com.example.mongo.model;
 
-import com.example.order.dto.OrderView;
+import com.example.order.dto.OrderPayLoad;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.MongoId;
 
@@ -26,11 +25,9 @@ public class Order {
     private ObjectId id;
 
     /**
-     * 주문서 uniq 코드
-     * ex) 0020101,0020102
+     * 음료수 재고 관리 코드
      */
-    @Indexed(unique = true)
-    private String code;
+    private String drinkCode;
 
     /**
      * 구매 항목
@@ -48,7 +45,7 @@ public class Order {
     @CreatedDate
     private Instant createDate;
 
-    public OrderView toOrderView() {
-        return new OrderView(id,code,item,price,createDate);
+    public static Order of(OrderPayLoad orderPayLoad) {
+        return new Order(null,orderPayLoad.getDrinkCode(),orderPayLoad.getItem(), orderPayLoad.getPrice(), null);
     }
 }
