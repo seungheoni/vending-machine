@@ -1,7 +1,7 @@
 package com.example.order.service
 
+import com.example.mongo.model.Order
 import com.example.order.dto.OrderPayLoad
-import com.example.order.dto.OrderView
 import com.example.order.fixture.order
 import com.example.order.repo.OrderRepository
 import io.kotest.core.spec.style.BehaviorSpec
@@ -28,7 +28,7 @@ class OrderServiceImplTest(
 
         val order2 = order {
             this.id = ObjectId.get()
-            this.code = code
+            this.drinkCode = code
             this.item = drinkName
             this.price = price
             this.createDate = Instant.now()
@@ -38,10 +38,10 @@ class OrderServiceImplTest(
 
         When("주문서 생성") {
 
-            val expected = orderServiceImpl.orderWrite(payload)
+            val expected = orderServiceImpl.registerBy(payload)
 
-            Then("view 형태의 dto로 반환한다.") {
-                expected.shouldBeTypeOf<OrderView>()
+            Then("order를 반환한다.") {
+                expected.shouldBeTypeOf<Order>()
             }
         }
     }
