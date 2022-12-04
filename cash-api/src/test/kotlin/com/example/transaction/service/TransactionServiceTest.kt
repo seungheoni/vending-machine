@@ -1,6 +1,7 @@
 package com.example.transaction.service
 
 import com.example.mongo.model.TransactionType
+import com.example.mongo.model.entitymapper.TransactionMapper
 import com.example.transaction.fixture.transaction
 import com.example.transaction.repo.TransactionRepository
 import io.kotest.core.spec.style.BehaviorSpec
@@ -8,11 +9,13 @@ import io.kotest.matchers.shouldBe
 import io.mockk.clearAllMocks
 import io.mockk.every
 import io.mockk.mockk
+import org.mapstruct.factory.Mappers
 
 class TransactionServiceTest : BehaviorSpec({
 
     val transactionRepository: TransactionRepository = mockk()
-    val transactionServiceImpl = TransactionServiceImpl(transactionRepository)
+    val transactionMapper : TransactionMapper =  Mappers.getMapper(TransactionMapper::class.java)
+    val transactionServiceImpl = TransactionServiceImpl(transactionRepository,transactionMapper)
 
     beforeEach {
         clearAllMocks()
