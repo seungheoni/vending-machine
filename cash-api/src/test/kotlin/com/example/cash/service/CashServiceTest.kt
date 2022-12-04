@@ -6,7 +6,8 @@ import com.example.error.ErrorMessage
 import com.example.error.exception.CashEmptyException
 import com.example.error.exception.CashNotEnoughException
 import com.example.mongo.model.Cash
-import com.example.mongo.model.Transaction
+import com.example.mongo.model.entitymapper.CashMapper
+import com.example.mongo.model.entitymapper.TransactionMapper
 import com.example.transaction.service.TransactionServiceImpl
 import io.kotest.assertions.throwables.shouldThrowExactly
 import io.kotest.core.spec.style.BehaviorSpec
@@ -14,6 +15,7 @@ import io.kotest.matchers.shouldBe
 import io.mockk.clearAllMocks
 import io.mockk.every
 import io.mockk.mockk
+import org.mapstruct.factory.Mappers
 import java.util.*
 
 class CashServiceTest : BehaviorSpec({
@@ -21,7 +23,10 @@ class CashServiceTest : BehaviorSpec({
     val transactionServiceImpl : TransactionServiceImpl = mockk()
     val cashRepository :  CashRepository = mockk()
 
-    val cashService = CashServiceImpl(cashRepository,transactionServiceImpl)
+    val cashMapper : CashMapper =  Mappers.getMapper(CashMapper::class.java)
+    val transactionMapper : TransactionMapper =  Mappers.getMapper(TransactionMapper::class.java)
+
+    val cashService = CashServiceImpl(cashRepository,transactionServiceImpl,cashMapper)
 
     beforeEach {
         clearAllMocks()
@@ -41,7 +46,7 @@ class CashServiceTest : BehaviorSpec({
 
             every {
                 transactionServiceImpl.deposit(amount)
-            } returns Transaction.ofDeposit(amount)
+            } returns transactionMapper.ofDeposit(amount)
 
             val exception = shouldThrowExactly<NoSuchElementException> {
                 cashService.deposit(amount)
@@ -54,8 +59,8 @@ class CashServiceTest : BehaviorSpec({
 
         When("자판기의 잔액이 "+ balance +"원인 상태에서 "+ amount + "원을 추가로 입금하면") {
             val cash = Cash.of(balance)
-            val depositCash = cash.deposit(amount)
-            val expected = depositCash.toCashDepositView()
+            val depositCash = cashMapper.deposit(cash,amount)
+            val expected = cashMapper.CashToCashDepositView(depositCash)
 
             every {
                 cashRepository.findFirstBy()
@@ -63,7 +68,7 @@ class CashServiceTest : BehaviorSpec({
 
             every {
                 transactionServiceImpl.deposit(amount)
-            } returns Transaction.ofDeposit(amount)
+            } returns transactionMapper.ofDeposit(amount)
 
             every {
                 cashRepository.save(depositCash)
@@ -100,7 +105,7 @@ class CashServiceTest : BehaviorSpec({
         val balance = 1000L
         When("잔액이 "+balance+"원 일떄 거스름돈을 반환하면") {
             val cash = Cash.of(balance)
-            val changeCash = cash.change()
+            val changeCash = cashMapper.change(cash)
             val expected = CashChangeView(balance)
 
             every {
@@ -109,7 +114,7 @@ class CashServiceTest : BehaviorSpec({
 
             every {
                 transactionServiceImpl.change(balance)
-            } returns Transaction.ofChange(balance)
+            } returns transactionMapper.ofChange(balance)
 
             every {
                 cashRepository.save(changeCash)
@@ -143,7 +148,7 @@ class CashServiceTest : BehaviorSpec({
 
         When("잔액이 " + balance + "원인 경우" + amount + "원을 사용할떄") {
             val cash = Cash.of(balance)
-            val chargeCash = cash.charge(amount)
+            val chargeCash = cashMapper.charge(cash,amount)
 
             every {
                 cashRepository.findFirstBy()
@@ -151,7 +156,7 @@ class CashServiceTest : BehaviorSpec({
 
             every {
                 transactionServiceImpl.charge(balance)
-            } returns Transaction.ofCharge(balance)
+            } returns transactionMapper.ofCharge(balance)
 
             every {
                 cashRepository.save(chargeCash)
