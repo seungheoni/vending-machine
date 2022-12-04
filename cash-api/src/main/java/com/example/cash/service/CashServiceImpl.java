@@ -6,6 +6,7 @@ import com.example.cash.repo.CashRepository;
 import com.example.error.exception.CashEmptyException;
 import com.example.error.exception.CashNotEnoughException;
 import com.example.mongo.model.Cash;
+import com.example.mongo.model.entitymapper.CashMapper;
 import com.example.transaction.service.TransactionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
@@ -18,13 +19,15 @@ public class CashServiceImpl implements CashService {
 
     private final TransactionService transactionService;
 
+    private final CashMapper cashMapper;
+
     @Override
     public CashDepositView deposit(final Long amount) {
         return cashRepository.findFirstBy()
-                .map(cash -> cashRepository.save(cash.deposit(amount))
+                .map(cash -> cashRepository.save(cashMapper.deposit(cash,amount))
                 ).map(cash -> {
                     transactionService.deposit(amount);
-                    return cash.toCashDepositView();
+                    return cashMapper.CashToCashDepositView(cash);
                 }).orElseThrow();
     }
 
@@ -33,9 +36,9 @@ public class CashServiceImpl implements CashService {
         return cashRepository.findFirstBy()
                 .filter(Cash::enableBalance)
                 .map(cash -> {
-                    cashRepository.save(cash.change());
+                    cashRepository.save(cashMapper.change(cash));
                     transactionService.change(cash.getBalance());
-                    return cash.toCashChangeView();
+                    return cashMapper.CashToCashChangeView(cash);
                 }).orElseThrow(() -> {
                     throw new CashEmptyException();
                 });
@@ -44,7 +47,7 @@ public class CashServiceImpl implements CashService {
     @Override
     public void charge(Long amount) {
         cashRepository.findFirstBy()
-                .map(cash -> cash.charge(amount))
+                .map(cash -> cashMapper.charge(cash,amount))
                 .filter(cash -> cash.getBalance() >= 0)
                 .ifPresentOrElse(cash -> {
                     cashRepository.save(cash);
