@@ -44,41 +44,4 @@ public class Transaction {
      */
     @LastModifiedDate
     private Instant updateDate;
-
-    /**
-     * 거래 내역 생성
-     *
-     * @param type   거래 구분
-     * @param amount 거래 내역금액
-     */
-    private static Transaction of(TransactionType type, Long amount) {
-        return new Transaction(null, type, amount, null, null);
-    }
-
-    /**
-     * 거래 입금 내역 생성
-     *
-     * @param amount 거래 입금 금액
-     */
-    public static Transaction ofDeposit(Long amount) {
-        return of(TransactionType.DEPOSIT, amount);
-    }
-
-    /**
-     * 거스름돈 반환 내역 생성
-     *
-     * @param amount 거스름돈 반환 금액
-     */
-    public static Transaction ofChange(Long amount) {
-        return of(TransactionType.CHANGE, amount);
-    }
-
-    /**
-     * 입금 금액 사용
-     *
-     * @param amount 사용한 금액
-     */
-    public static Transaction ofCharge(Long amount) {
-        return of(TransactionType.CHARGE, amount);
-    }
 }
