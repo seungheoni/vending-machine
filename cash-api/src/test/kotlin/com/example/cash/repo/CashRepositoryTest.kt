@@ -57,6 +57,7 @@ class CashRepositoryTest(
 
     Given("cash 데이터가 db에 존재하지 않을떄") {
         When("cash 데이터를 조회하면") {
+            cashRepository.deleteAll()
             val cash : Optional<Cash> = cashRepository.findFirstBy()
             Then("Optional.empty 상태를 반환한다.") {
                 cash shouldBe Optional.empty()

@@ -5,7 +5,6 @@ import com.example.mongo.model.entitymapper.OrderMapper;
 import com.example.order.dto.OrderPayLoad;
 import com.example.order.repo.OrderRepository;
 import lombok.RequiredArgsConstructor;
-import org.mapstruct.factory.Mappers;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -14,7 +13,7 @@ public class OrderServiceImpl implements OrderService {
 
     private final OrderRepository orderRepository;
 
-    private OrderMapper orderMapper = Mappers.getMapper(OrderMapper.class);
+    private final OrderMapper orderMapper;
 
     @Override
     public Order registerBy(OrderPayLoad orderPayLoad) {

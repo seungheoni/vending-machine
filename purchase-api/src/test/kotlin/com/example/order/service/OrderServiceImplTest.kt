@@ -1,6 +1,7 @@
 package com.example.order.service
 
 import com.example.mongo.model.Order
+import com.example.mongo.model.entitymapper.OrderMapper
 import com.example.order.dto.OrderPayLoad
 import com.example.order.fixture.order
 import com.example.order.repo.OrderRepository
@@ -9,6 +10,7 @@ import io.kotest.matchers.types.shouldBeTypeOf
 import io.mockk.every
 import io.mockk.mockk
 import org.bson.types.ObjectId
+import org.mapstruct.factory.Mappers
 import java.time.Instant
 
 class OrderServiceImplTest(
@@ -16,7 +18,8 @@ class OrderServiceImplTest(
 ) : BehaviorSpec({
 
     val orderRepository : OrderRepository = mockk()
-    val orderServiceImpl =  OrderServiceImpl(orderRepository)
+    val orderMapper : OrderMapper = Mappers.getMapper(OrderMapper::class.java)
+    val orderServiceImpl =  OrderServiceImpl(orderRepository,orderMapper)
 
     val code = "002010"
     val drinkName = "콜라"
