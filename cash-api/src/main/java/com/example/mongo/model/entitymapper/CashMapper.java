@@ -11,10 +11,10 @@ import org.mapstruct.Named;
 @Mapper(componentModel = "spring", uses = {})
 public interface CashMapper {
 
-    CashDepositView CashToCashDepositView(Cash cash);
+    CashDepositView cashToCashDepositView(Cash cash);
 
     @Mapping(target = "amount", source = "cash.balance")
-    CashChangeView CashToCashChangeView(Cash cash);
+    CashChangeView cashToCashChangeView(Cash cash);
 
     /**
      * 입금하기
