@@ -45,6 +45,10 @@ public class Display {
         return new Display(null, position, drinkCode, null);
     }
 
+    /**
+     * drinks 정보가 존재하는지 확인
+     * @return boolean
+     */
     public boolean isDrinkRegistered() {
         return !drinks.isEmpty();
     }
