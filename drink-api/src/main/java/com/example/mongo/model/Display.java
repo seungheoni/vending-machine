@@ -45,20 +45,7 @@ public class Display {
         return new Display(null, position, drinkCode, null);
     }
 
-    /**
-     * 전시 음료결과 데이터 변환
-     */
-    public DisplayDrinkView toDisplayDrinkResult() {
-        return drinks.stream().filter(Objects::nonNull).findFirst().map(this::toDisplayDrinkView).orElse(null);
-    }
-
-    /**
-     * DisplayDrinkView 변환 함수
-     *
-     * @param drink 음료수
-     */
-    private DisplayDrinkView toDisplayDrinkView(Drink drink) {
-        Status status = (drink.quantity == 0) ? Status.SOLDOUT : Status.AVAILABLE;
-        return new DisplayDrinkView(drink.code, position, status, drink.name, drink.price);
+    public boolean isDrinkRegistered() {
+        return !drinks.isEmpty();
     }
 }
