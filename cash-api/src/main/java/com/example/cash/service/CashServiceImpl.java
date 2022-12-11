@@ -27,7 +27,7 @@ public class CashServiceImpl implements CashService {
                 .map(cash -> cashRepository.save(cashMapper.deposit(cash,amount))
                 ).map(cash -> {
                     transactionService.deposit(amount);
-                    return cashMapper.CashToCashDepositView(cash);
+                    return cashMapper.cashToCashDepositView(cash);
                 }).orElseThrow();
     }
 
@@ -38,7 +38,7 @@ public class CashServiceImpl implements CashService {
                 .map(cash -> {
                     cashRepository.save(cashMapper.change(cash));
                     transactionService.change(cash.getBalance());
-                    return cashMapper.CashToCashChangeView(cash);
+                    return cashMapper.cashToCashChangeView(cash);
                 }).orElseThrow(() -> {
                     throw new CashEmptyException();
                 });

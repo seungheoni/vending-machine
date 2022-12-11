@@ -1,13 +1,11 @@
 package com.example.display.controller
 
 import com.example.display.dto.DisplayDrinkView
-import com.example.display.fixture.display
 import com.example.display.service.DisplayService
-import com.example.mongo.model.Drink
+import com.example.drink.enums.Status
 import com.ninjasquad.springmockk.MockkBean
 import io.kotest.core.spec.style.BehaviorSpec
 import io.mockk.every
-import org.bson.types.ObjectId
 import org.springframework.boot.test.autoconfigure.web.reactive.AutoConfigureWebTestClient
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.http.MediaType
@@ -24,12 +22,11 @@ class DisplayControllerTest(
     Given("/drinks/display 테스트") {
         When("cashService 0원인 상태"){
             Then("요청하면 displaydrinkview 형태의 음료수 전시 데이터를 리턴한다."){
-                every { displayService.displayDrinks } returns listOf((display {
-                    id = ObjectId.get()
-                    position = 1
-                    drinkCode = "coke"
-                    drinks = listOf<Drink>(Drink.of("coke", "콜라", 1000,5))
-                }))
+                every { displayService.displayDrinks } returns listOf(
+                    DisplayDrinkView("coca-cola-500ml",1,Status.AVAILABLE,"콜라",1000L),
+                    DisplayDrinkView("sik-hye-500ml",2,Status.AVAILABLE,"식혜",2000L),
+                    DisplayDrinkView("soda-pop-500ml",3,Status.SOLDOUT,"사이다",1500L),
+                )
 
                 webTestClient
                     .get()

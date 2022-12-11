@@ -1,9 +1,9 @@
 package com.example.display.service;
 
-import com.example.mongo.model.Display;
+import com.example.display.dto.DisplayDrinkView;
 
 import java.util.List;
 
 public interface DisplayService {
-    List<Display> getDisplayDrinks();
+    List<DisplayDrinkView> getDisplayDrinks();
 }

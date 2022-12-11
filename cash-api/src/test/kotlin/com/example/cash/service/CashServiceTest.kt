@@ -60,7 +60,7 @@ class CashServiceTest : BehaviorSpec({
         When("자판기의 잔액이 "+ balance +"원인 상태에서 "+ amount + "원을 추가로 입금하면") {
             val cash = Cash.of(balance)
             val depositCash = cashMapper.deposit(cash,amount)
-            val expected = cashMapper.CashToCashDepositView(depositCash)
+            val expected = cashMapper.cashToCashDepositView(depositCash)
 
             every {
                 cashRepository.findFirstBy()
