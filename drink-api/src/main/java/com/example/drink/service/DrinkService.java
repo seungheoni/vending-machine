@@ -4,5 +4,5 @@ import com.example.mongo.model.Drink;
 
 public interface DrinkService {
 
-    Drink getDrinkByDrinkCode(String drinkCode);
+    Drink getByDrinkCode(String drinkCode);
 }
