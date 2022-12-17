@@ -12,7 +12,6 @@ import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.matchers.longs.shouldBeLessThan
 import io.kotest.matchers.shouldBe
 import io.mockk.clearAllMocks
-import io.mockk.coEvery
 import io.mockk.every
 import io.mockk.mockk
 import org.bson.types.ObjectId
@@ -77,7 +76,7 @@ class DrinkServiceImplTest : BehaviorSpec({
                 this.quantity = 0
             }
 
-            coEvery {
+            every {
                 drinkService.getByDrinkCode(drink.code)
             } returns drink
 
@@ -101,11 +100,11 @@ class DrinkServiceImplTest : BehaviorSpec({
 
             val updateDrink = drinkMapper.reduceQuantity(drink)
 
-            coEvery {
+            every {
                 drinkService.getByDrinkCode(drink.code)
             } returns drink
 
-            coEvery {
+            every {
                 drinkRepository.save(updateDrink)
             } returns updateDrink
 
