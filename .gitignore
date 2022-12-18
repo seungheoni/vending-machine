@@ -35,3 +35,5 @@ out/
 
 ### VS Code ###
 .vscode/
+/drink-api/src/main/generated/
+/cash-api/src/main/generated/
