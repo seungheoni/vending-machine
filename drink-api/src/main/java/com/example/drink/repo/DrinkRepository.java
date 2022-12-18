@@ -12,4 +12,5 @@ public interface DrinkRepository extends MongoRepository<Drink, ObjectId> {
 
     Optional<Drink> findByName(String name);
 
+    Optional<Drink> findByCode(String code);
 }

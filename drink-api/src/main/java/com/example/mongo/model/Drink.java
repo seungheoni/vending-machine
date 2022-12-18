@@ -48,4 +48,11 @@ public class Drink {
     public static Drink of(String code, String name, int price, int quantity) {
         return new Drink(null, code, name, price, quantity);
     }
+
+    /**
+     * 상품이 남아있는지 여부 체크
+     */
+    public boolean isRemained() {
+        return quantity > 0;
+    }
 }
