@@ -110,7 +110,7 @@ class CashControllerUnitTest(
             val exchange = cashChangeClient().exchange()
             val expected = ErrorMessage.CASH_EMPTY
             Then("status: 404 NOT FOUND") {
-                exchange.expectStatus().isNotFound
+                exchange.expectStatus().is5xxServerError
             }
 
             Then("body: message: " + expected + "이다") {
