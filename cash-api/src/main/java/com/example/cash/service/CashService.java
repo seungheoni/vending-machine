@@ -2,6 +2,7 @@ package com.example.cash.service;
 
 import com.example.cash.dto.CashChangeView;
 import com.example.cash.dto.CashDepositView;
+import com.example.mongo.model.Transaction;
 
 public interface CashService {
 
@@ -20,5 +21,5 @@ public interface CashService {
      * 입금 금액 사용
      * @param amount 사용 금액
      */
-    void charge(Long amount);
+    Transaction charge(Long amount);
 }

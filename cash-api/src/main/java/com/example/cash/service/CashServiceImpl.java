@@ -6,6 +6,7 @@ import com.example.cash.repo.CashRepository;
 import com.example.error.exception.CashEmptyException;
 import com.example.error.exception.CashNotEnoughException;
 import com.example.mongo.model.Cash;
+import com.example.mongo.model.Transaction;
 import com.example.mongo.model.entitymapper.CashMapper;
 import com.example.transaction.service.TransactionService;
 import lombok.RequiredArgsConstructor;
@@ -45,15 +46,15 @@ public class CashServiceImpl implements CashService {
     }
 
     @Override
-    public void charge(Long amount) {
-        cashRepository.findFirstBy()
+    public Transaction charge(Long amount) {
+         return cashRepository.findFirstBy()
                 .map(cash -> cashMapper.charge(cash,amount))
                 .filter(cash -> cash.getBalance() >= 0)
-                .ifPresentOrElse(cash -> {
+                .map(cash -> {
                     cashRepository.save(cash);
-                    transactionService.charge(amount);
-                }, () -> {
+                    return transactionService.charge(amount);
+                }).orElseThrow(()-> {
                     throw new CashNotEnoughException();
-                });
+                 });
     }
 }

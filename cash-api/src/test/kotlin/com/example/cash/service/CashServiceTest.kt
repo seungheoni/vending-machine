@@ -6,12 +6,14 @@ import com.example.error.ErrorMessage
 import com.example.error.exception.CashEmptyException
 import com.example.error.exception.CashNotEnoughException
 import com.example.mongo.model.Cash
+import com.example.mongo.model.Transaction
 import com.example.mongo.model.entitymapper.CashMapper
 import com.example.mongo.model.entitymapper.TransactionMapper
 import com.example.transaction.service.TransactionServiceImpl
 import io.kotest.assertions.throwables.shouldThrowExactly
 import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.matchers.shouldBe
+import io.kotest.matchers.types.shouldBeTypeOf
 import io.mockk.clearAllMocks
 import io.mockk.every
 import io.mockk.mockk
@@ -163,8 +165,8 @@ class CashServiceTest : BehaviorSpec({
             } returns chargeCash
 
             val result = cashService.charge(amount)
-            Then("return 값이 존재하지 않는다") {
-                result shouldBe Unit
+            Then("거래이력(Transaction)을 리턴한다.") {
+                result.shouldBeTypeOf<Transaction>();
             }
         }
     }
