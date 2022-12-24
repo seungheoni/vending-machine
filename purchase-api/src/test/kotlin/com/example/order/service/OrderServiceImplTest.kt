@@ -1,9 +1,11 @@
 package com.example.order.service
 
 import com.example.mongo.model.Order
+import com.example.mongo.model.TransactionType
 import com.example.mongo.model.entitymapper.OrderMapper
-import com.example.order.dto.OrderPayLoad
+import com.example.order.fixture.drink
 import com.example.order.fixture.order
+import com.example.order.fixture.transaction
 import com.example.order.repo.OrderRepository
 import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.matchers.types.shouldBeTypeOf
@@ -21,19 +23,27 @@ class OrderServiceImplTest(
     val orderMapper : OrderMapper = Mappers.getMapper(OrderMapper::class.java)
     val orderServiceImpl =  OrderServiceImpl(orderRepository,orderMapper)
 
-    val code = "002010"
-    val drinkName = "콜라"
-    val price = 1000L
 
-    val payload = OrderPayLoad(code,drinkName,price)
+    val drink = drink {
+        this.id = ObjectId.get()
+        this.code = "coca-cola-500ml"
+        this.name = "콜라"
+        this.price = 2000L
+    }
+
+    val transaction = transaction {
+        this.id = ObjectId.get()
+        this.type = TransactionType.CHARGE
+        this.amount = 2000L
+    }
 
     Given("order 주문서 생성 서비스 테스트") {
 
         val order2 = order {
             this.id = ObjectId.get()
-            this.drinkCode = code
-            this.item = drinkName
-            this.price = price
+            this.drinkCode = "coca-cola-500ml"
+            this.item = "콜라"
+            this.price = 2000L
             this.createDate = Instant.now()
         }
 
@@ -41,7 +51,7 @@ class OrderServiceImplTest(
 
         When("주문서 생성") {
 
-            val expected = orderServiceImpl.registerBy(payload)
+            val expected = orderServiceImpl.registerBy(drink,transaction)
 
             Then("order를 반환한다.") {
                 expected.shouldBeTypeOf<Order>()
