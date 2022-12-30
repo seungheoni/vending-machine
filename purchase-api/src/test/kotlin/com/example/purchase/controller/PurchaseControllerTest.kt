@@ -8,7 +8,6 @@ import io.mockk.every
 import org.springframework.boot.test.autoconfigure.web.reactive.AutoConfigureWebTestClient
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.http.MediaType
-import org.springframework.http.ResponseEntity
 import org.springframework.test.web.reactive.server.WebTestClient
 import org.springframework.web.reactive.function.BodyInserters
 
@@ -53,7 +52,7 @@ class PurchaseControllerTest(
 
             val payload = PurchaseDrinkPayLoad("coca-cola-500ml")
 
-            every { purchaseService.purchaseDrink(payload) } returns 0
+            every { purchaseService.purchaseDrink(payload) } returns Unit
             val exchange = purchaseDrinkClient(payload).exchange()
 
             Then("status 204 NoContent") {
