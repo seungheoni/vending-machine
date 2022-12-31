@@ -14,6 +14,10 @@ import javax.validation.Valid;
 @RequiredArgsConstructor
 public class PurchaseController {
 
+
+    /**
+     * 음료수 구매 aggreagte 서비스
+     */
     private final PurchaseService purchaseService;
 
     /**
