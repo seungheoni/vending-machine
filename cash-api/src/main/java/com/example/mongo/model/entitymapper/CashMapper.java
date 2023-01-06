@@ -21,8 +21,8 @@ public interface CashMapper {
      * @param cash 캐시정보
      * @param amount 금액
      */
-    @Mapping(target = "balance",source = "amount", qualifiedByName = "increaseBalance")
-    Cash deposit(@Context Cash cash, Long amount);
+    @Mapping(target = "balance",source = "cash.balance", qualifiedByName = "increaseBalance")
+    Cash deposit(Cash cash, @Context Long amount);
 
 
     /**
@@ -45,7 +45,7 @@ public interface CashMapper {
     }
 
     @Named("increaseBalance")
-    default Long increaseBalance(@Context Cash cash, Long amount) {
-        return cash.getBalance() + amount;
+    default Long increaseBalance(Long balance, @Context Long amount) {
+        return balance + amount;
     }
 }
