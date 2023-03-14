@@ -36,6 +36,11 @@ subprojects {
 
     dependencies {
 
+        // oauth-client
+        implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
+        implementation 'org.springframework.boot:spring-boot-starter-oauth2-resource-server'
+        implementation 'org.springframework.boot:spring-boot-starter-security'
+
         // Bill of Materials (BOM)
         implementation(platform("io.kotest:kotest-bom:5.4.2"))
         implementation(platform("org.testcontainers:testcontainers-bom:1.17.3"))
