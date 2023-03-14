@@ -18,3 +18,33 @@ spring:
   devtools:
     livereload:
       enabled: true
+
+  security:
+    oauth2:
+      client:
+        registration:
+          ## kakao 는 authorization_code 이라 해도
+          ## client_secret 활성화 되어있는 경우 필수: clientAuthenticationMethod: client_secret_post
+          vending-machine: # registrationId
+            client-id: vending-machine-client
+            client-secret: vending-machine-secret
+            clientAuthenticationMethod: client_secret_basic
+            authorizationGrantType: authorization_code
+            redirectUri: http://127.0.0.1:8080/login/oauth2/code/vending-machine
+            scope:
+              - openid
+            clientName: sign in sso
+        provider:
+          vending-machine:
+            authorizationUri: http://localhost:9090/oauth2/v1/authorize
+            tokenUri: http://localhost:9090/oauth2/v1/token
+            userInfoUri: http://localhost:9090/connect/v1/userinfo
+            jwkSetUri: http://localhost:9090/oauth2/v1/jwks
+            userNameAttribute: sub
+
+logging:
+  level:
+    root: INFO
+    org:
+      springframework:
+        security: TRACE
